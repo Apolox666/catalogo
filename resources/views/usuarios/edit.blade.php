@@ -45,10 +45,10 @@
                 <x-input-label for="password_confirmation" :value="__('Confirmar contraseña')" />
 
                 <x-text-input id="password_confirmation"
-                    class="block mt-1 w-full {{ $errors->has('password_confirmation') ? 'border-red-600' : '' }}"
+                    class="block mt-1 w-full {{ $errors->has('password') ? 'border-red-600' : '' }}"
                     type="password" name="password_confirmation" autocomplete="new-password" />
 
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

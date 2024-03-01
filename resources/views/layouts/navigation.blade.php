@@ -4,7 +4,7 @@
            <img src="{{asset('images/logo-supergiros.png')}}" width="200px" alt="">
         </a>
 
-        <ul class="mt-6">
+        <ul class="flex  flex-col gap-4 mt-6">
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                     <x-slot name="icon">
