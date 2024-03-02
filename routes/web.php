@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\GroupsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('usuarios', App\Http\Controllers\UserController::class)->names('user');
+
+Route::resource('actividades', \App\Http\Controllers\ActivitiesController::class)->names('activity');
+
+
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
 
