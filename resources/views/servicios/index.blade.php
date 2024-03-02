@@ -4,7 +4,10 @@
         {{ __('Users') }}
     </x-slot>
 
-    <div class="p-4 bg-white rounded-lg shadow-xs">
-       
+    <div class="relative overflow-x-auto p-8">
+        <div class="p-4 bg-white rounded-lg shadow-xs">
+            <h1 class=" text-black text-3xl py-8 font-bold">Servicios</h1>
+           
+        </div>
     </div>
 </x-app-layout>

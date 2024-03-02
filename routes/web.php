@@ -26,9 +26,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('usuarios', App\Http\Controllers\UserController::class)->names('user');
-
-Route::resource('actividades', \App\Http\Controllers\ActivitiesController::class)->names('activity');
-
+Route::resource('actividades', App\Http\Controllers\ActivitiesController::class)->names('activity');
+Route::resource('grupos', App\Http\Controllers\GroupsController::class)->names('group');
+Route::resource('servicios', App\Http\Controllers\ServicesController::class)->names('service');
+Route::resource('productos', App\Http\Controllers\ProductController::class)->names('product');
 
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
