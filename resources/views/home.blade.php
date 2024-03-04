@@ -30,7 +30,7 @@
                     <a class="hover:text-blue-600 hidden md:flex" href="">Inicio</a>
                 </li>
                 <li>
-                    <a class="hover:text-blue-600 hidden md:flex" href="http://localhost/assist/public/#que_es">Que es
+                    <a class="hover:text-blue-600 hidden md:flex" href="http://localhost/catalogo/public/#que_es">Que es
                         MSU Assist</a>
                 </li>
                 @if (Route::has('login'))
@@ -72,45 +72,42 @@
             <div class="flex flex-col sm:flex-row gap-6">
                 <div
                     class="group flex flex-col justify-start items-start gap-2 w-96 h-56 duration-500 relative rounded-lg p-4 bg-blue-700 hover:-translate-y-2 hover:shadow-xl shadow-gray-300">
-                   
+
 
                     <div class="">
-                        <h2 class="text-2xl font-bold mb-2 text-white">Consulta los servicios TI</h2>
+                        <h2 class="text-2xl font-bold mb-2 text-white">Un catalogo</h2>
                         <p class="text-gray-100 line-clamp-3">
-                           Consulta informacion relevante acerca de los servicios prestados por el area de tecnologia
-                           dentro de SuperGiros.
+                            Consulta informacion relevante acerca de los servicios prestados por el area de tecnologia
+                            dentro de SuperGiros.
                         </p>
                     </div>
-                   
+
                 </div>
 
                 <div
                     class="group flex flex-col justify-start items-start gap-2 w-96 h-56 duration-500 relative rounded-lg p-4 bg-blue-700 hover:-translate-y-2 hover:shadow-xl shadow-gray-300">
-                    <div class="absolute duration-700 shadow-md group-hover:-translate-y-4 group-hover:-translate-x-4 -bottom-10 -right-10 w-1/2 h-1/2 rounded-lg bg-gray-200"
-                        alt="image here"></div>
+
 
                     <div class="">
                         <h2 class="text-2xl font-bold mb-2 text-white">Una guia</h2>
                         <p class="text-gray-100 line-clamp-3">
-                           El objetivo es guiar a las personas pertenecientes a supergiros en el proceso 
-                           de solicitar los servicios del area de tecnologia
+                            El objetivo es guiar a las personas pertenecientes a supergiros en el proceso
+                            de solicitar los servicios del area de tecnologia
                         </p>
                     </div>
-                  
+
                 </div>
 
                 <div
-                    class="group flex flex-col justify-start items-start gap-2 w-96 h-56 duration-500 relative rounded-lg p-4 bg-gray-100 hover:-translate-y-2 hover:shadow-xl shadow-gray-300">
-                    <div class="absolute duration-700 shadow-md group-hover:-translate-y-4 group-hover:-translate-x-4 -bottom-10 -right-10 w-1/2 h-1/2 rounded-lg bg-gray-200"
-                        alt="image here"></div>
+                    class="group flex flex-col justify-start items-start gap-2 w-96 h-56 duration-500 relative rounded-lg p-4 bg-blue-700 hover:-translate-y-2 hover:shadow-xl shadow-gray-300">
+
 
                     <div class="">
-                        <h2 class="text-2xl font-bold mb-2 text-gray-800">Card</h2>
-                        <p class="text-gray-700 line-clamp-3">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis
-                            magna quis lectus fermentum, quis scelerisque orci pellentesque. Duis id
-                            porta justo. Sed ac enim id justo tincidunt hendrerit id ac lectus.
-                            Pellentesque maximus posuere tortor vitae consequat.
+                        <h2 class="text-2xl font-bold mb-2 text-white">Objetivo</h2>
+                        <p class="text-white line-clamp-3">
+                            Presentar una herramienta web intuitiva para que la organizacion esté enterada de la gestion
+                            tecnologica
+                            realizada
                         </p>
                     </div>
 

@@ -10,6 +10,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Scripts -->
         <script src="{{ asset('js/init-alpine.js') }}"></script>
+        <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 </head>
 <body>
 <div
@@ -32,5 +33,7 @@
         </main>
     </div>
 </div>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 </body>
+
 </html>
