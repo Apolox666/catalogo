@@ -30,6 +30,7 @@ Route::resource('actividades', App\Http\Controllers\ActivitiesController::class)
 Route::resource('grupos', App\Http\Controllers\GroupsController::class)->names('group');
 Route::resource('servicios', App\Http\Controllers\ServicesController::class)->names('service');
 Route::resource('productos', App\Http\Controllers\ProductController::class)->names('product');
+Route::resource('responsables', App\Http\Controllers\ResponsibleControler::class)->names('responsible');
 
 Route::middleware('auth')->group(function () {
 
