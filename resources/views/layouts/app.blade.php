@@ -26,7 +26,7 @@
         @include('layouts.top-menu')
         <main class="h-full overflow-y-auto bg-gray-200">
             
-            <div class="container my-6 px-6 mx-auto grid ">
+            <div class="container  px-2 mx-auto grid ">
 
                 {{ $slot }}
             </div>

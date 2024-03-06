@@ -13,6 +13,7 @@ class ResponsibleControler extends Controller
     public function index()
     {
         $responsibles = Responsible::all();
+        
         return (view('responsables.index', compact('responsibles')));
     }
 
@@ -85,7 +86,7 @@ class ResponsibleControler extends Controller
         $responsible = Responsible::find($id);
 
         $validator = $request->validate([
-            'name' => ['required', 'string', 'max:28', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'string', 'max:28', 'regex:/^[a-zA-ZñÑ\s]+$/'],
         ], $messages);
 
         // Verificar la unicidad del correo electrónico excluyendo el usuario actual

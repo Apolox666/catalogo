@@ -27,15 +27,14 @@
 
                     <thead>
                         <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">nombre</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($responsibles as $responsible)
                             <tr class="user-row">
-                                <td>{{ $responsible->id }}</td>
+                             
                                 <td>{{ $responsible->name }}</td>
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
@@ -82,8 +81,8 @@
     $('.eliminar').click(function() {
         var id = $(this).data('id'); // Obtener el valor del atributo data-id
         Swal.fire({
-            title: '¿Estás seguro de borrar este usuario?',
-            text: "Recuerda que esta acción no se puede deshacer",
+            title: '¿Estás seguro de borrar este registro?',
+            text: "Es posible que este responsable esté asosciado a un grupo de trabajo",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

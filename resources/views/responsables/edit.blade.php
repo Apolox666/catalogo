@@ -4,7 +4,7 @@
     <div class="relative overflow-x-auto p-8">
         <div class="p-4 bg-white rounded-lg shadow-xs">
             <h1 class=" text-black text-3xl py-8 font-bold">Editar responsable</h1>
-            <form method="POST" class="p-6" action="{{ route('responsible.update', $responsible->id) }}">
+            <form method="POST" id="edit-form" class="p-6" action="{{ route('responsible.update', $responsible->id) }}">
                 {{ method_field('PATCH') }}
                 @csrf
                 
@@ -25,7 +25,7 @@
                         {{ __('Cancelar') }}
                     </x-cancel-button>
                     <x-primary-button class="ms-4">
-                        {{ __('Registrar') }}
+                        {{ __('Editar') }}
                     </x-primary-button>
                 </div>
             </form>
