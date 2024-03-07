@@ -83,11 +83,18 @@ class GroupsController extends Controller
     {
         $group = Group::findOrFail($id);
 
+
+        $messages = [
+            'required' => 'Este campo es obligatorio.',
+            'name.max' => 'El nombre introducido es muy largo',
+            'name.regex' => 'El campo  solo debe contener letras y espacios.', 
+        ];
+
         // Valida los datos del formulario
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|regex:/^[a-zA-ZñÑ\s]+$/',
             'responsibles' => 'array', // Asegura que al menos un responsable sea seleccionado
-        ]);
+        ], $messages);
 
         // Actualiza los datos del grupo
         $group->update([
@@ -105,7 +112,7 @@ class GroupsController extends Controller
      */
     public function destroy(string $id)
     {
-        $group = Responsible::findOrFail($id);
+        $group = Group::findOrFail($id);
 
         $group->delete();
         return $resulta = "ok";

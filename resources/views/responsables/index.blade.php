@@ -83,7 +83,7 @@
         Swal.fire({
             title: '¿Estás seguro de borrar este registro?',
             text: "Es posible que este responsable esté asosciado a un grupo de trabajo",
-            icon: 'warning',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -107,9 +107,9 @@
                     },
                     error: function(respuesta) {
                         Swal.fire(
-                            'Error',
-                            'Error desconocido',
-                            'error'
+                            'No se puede realizar esta accion',
+                            'Es probable que este responsable se encuentre dentro de un grupo de trabajo',
+                            'warning'
                         );
                     }
                 });

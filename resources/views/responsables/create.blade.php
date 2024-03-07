@@ -9,12 +9,42 @@
 
                 <!-- Name -->
                 <div> 
-                    <x-input-label for="name" :value="__('Nombre completo')" />
-                    <x-text-input id="name"
-                        class="block mt-6 w-full {{ $errors->has('name') ? 'border-red-600' : '' }}" type="text"
-                        name="name" :value="old('name')"  autofocus autocomplete="name" />
+                    <x-input-label for="first_name" :value="__('Primer nombre *')" />
+                    <x-text-input id="first_name"
+                        class="block mt-6 w-full {{ $errors->has('first_name') ? 'border-red-600' : '' }}" type="text"
+                        name="first_name" :value="old('name')"  autofocus autocomplete="name" />
 
-                    @error('name')
+                    @error('first_name')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mt-12"> 
+                    <x-input-label for="second_name" :value="__('Segundo nombre ')" />
+                    <x-text-input id="second_name"
+                        class="block mt-6 w-full {{ $errors->has('second_name') ? 'border-red-600' : '' }}" type="text"
+                        name="second_name" :value="old('name')"  autofocus autocomplete="name" />
+
+                    @error('second_name')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mt-12"> 
+                    <x-input-label for="first_surname" :value="__('Primer apellido *')" />
+                    <x-text-input id="first_surname"
+                        class="block mt-6 w-full {{ $errors->has('first_name') ? 'border-red-600' : '' }}" type="text"
+                        name="first_surname" :value="old('name')"  autofocus autocomplete="name" />
+
+                    @error('first_name')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mt-12"> 
+                    <x-input-label for="second_surname" :value="__('Segundo apellido *')" />
+                    <x-text-input id="second_surname"
+                        class="block mt-6 w-full {{ $errors->has('first_name') ? 'border-red-600' : '' }}" type="text"
+                        name="second_surname" :value="old('name')"  autofocus autocomplete="name" />
+
+                    @error('first_name')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

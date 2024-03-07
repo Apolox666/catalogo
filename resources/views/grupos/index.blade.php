@@ -4,7 +4,7 @@
     <div class="relative overflow-x-auto p-8">
         <div class="p-8 bg-white  shadow-xs rounded-xl">
             <h1 class=" text-black text-3xl py-8 font-bold">Grupos de trabajo</h1>
-            <a href="{{ route('group.create') }}">
+            <a href="{{ route('group.create') }}" class="w-36">
                 <button
                     class="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border mb-4 border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500">
                     <span
@@ -20,7 +20,6 @@
                         </svg>
                     </span>
                 </button>
-
             </a>
             <div class="overflow-hidden mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
@@ -41,6 +40,7 @@
                                             <li>{{ $responsible->name }}</li>
                                         @endforeach
                                     </ul>
+
                                 </td>
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
@@ -83,13 +83,13 @@
             $('#Table').DataTable();
         });
     </script>
-     <script>
+    <script>
         $('.eliminar').click(function() {
             var id = $(this).data('id'); // Obtener el valor del atributo data-id
             Swal.fire({
                 title: '¿Estás seguro de borrar este registro?',
                 text: "Es posible que este responsable esté asosciado a un grupo de trabajo",
-                icon: 'warning',
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -109,13 +109,13 @@
                                 'success'
                             );
                             // Eliminar el elemento eliminado de la interfaz
-                            $(`.eliminar[data-id=${id}]`).closest('.user-row').remove();
+                            $(`.eliminar[data-id=${id}]`).closest('.group-row').remove();
                         },
                         error: function(respuesta) {
                             Swal.fire(
-                                'Error',
-                                'Error desconocido',
-                                'error'
+                                'No se puede realizar esta accion',
+                                'Este grupo contiene responsables asociados',
+                                'warning'
                             );
                         }
                     });

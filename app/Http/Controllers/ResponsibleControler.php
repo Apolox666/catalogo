@@ -30,27 +30,35 @@ class ResponsibleControler extends Controller
      */
     public function store(Request $request)
     {
-        $responsible = new Responsible();
-
         $messages = [
             'required' => 'Este campo es obligatorio.',
-            'name.max' => 'El nombre introducido es muy largo',
-            'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+            'first_name.max' => 'El nombre introducido es muy largo',
+            'first_name.regex' => 'El campo solo debe contener letras y espacios.',
             // Añade más mensajes según tus necesidades
         ];
-
         $validator = $request->validate([
-            'name' => ['required', 'string', 'max:28', 'regex:/^[a-zA-Z\s]+$/'],
+            'first_name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
+           
         ], $messages);
-
+    
+        $first_name = ucfirst($request->input('first_name'));
+        $second_name = ucfirst($request->input('second_name'));
+        $first_surname = ucfirst($request->input('first_surname'));
+        $second_surname = ucfirst($request->input('second_surname'));
+    
+        // Construir el nombre completo
+        $name = trim("$first_name $second_name $first_surname $second_surname");
+    
         try {
-
-            $responsible->name = $request->input('name');
+            // Guardar el responsable en la base de datos
+            $responsible = new Responsible();
+            $responsible->name = $name;
             $responsible->save();
-            return redirect(route('responsible.index'));
+    
+            return redirect()->route('responsible.index')->with('success', 'El responsable se ha creado correctamente.');
         } catch (\Exception $e) {
-            // Handle the exception if any unexpected error occurs
-            throw $e;
+            // Manejar la excepción si ocurre algún error inesperado
+            return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
         }
     }
 
