@@ -4,7 +4,7 @@
     <div class="relative overflow-x-auto p-8">
         <div class="p-8 bg-white  shadow-xs rounded-xl">
             <h1 class=" text-black text-3xl py-8 font-bold">Actividades/Habilidades</h1>
-            <a href="">
+            <a href="{{route('activity.create')}}">
                 <button
                     class="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border mb-4 border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500">
                     <span

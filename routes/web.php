@@ -32,6 +32,8 @@ Route::resource('servicios', App\Http\Controllers\ServicesController::class)->na
 Route::resource('productos', App\Http\Controllers\ProductController::class)->names('product');
 Route::resource('responsables', App\Http\Controllers\ResponsibleControler::class)->names('responsible');
 
+
+
 Route::middleware('auth')->group(function () {
 
 

@@ -19,7 +19,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
+        return(view('servicios.create'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
