@@ -16,6 +16,7 @@ module.exports = {
                     "&::placeholder": {
                         color: theme("colors.gray.400"),
                     },
+                    
                 },
             },
         }),

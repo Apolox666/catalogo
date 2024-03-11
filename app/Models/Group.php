@@ -11,8 +11,7 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-      
+        'name',    
     ];
 
     public function responsibles()
@@ -20,4 +19,8 @@ class Group extends Model
         return $this->belongsToMany(Responsible::class);
     }
 
+    public function activities()
+    {
+        return $this->hasMany(Activity::class, 'group_id');
+    }
 }

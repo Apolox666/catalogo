@@ -4,7 +4,7 @@
     <div class="relative overflow-x-auto p-8">
         <div class="p-8 bg-white  shadow-xs rounded-xl">
             <h1 class=" text-black text-3xl py-8 font-bold">Actividades/Habilidades</h1>
-            <a href="{{route('activity.create')}}">
+            <a href="{{ route('activity.create') }}">
                 <button
                     class="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border mb-4 border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500">
                     <span
@@ -24,36 +24,55 @@
             </a>
             <div class="overflow-hidden mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
-                   
+
                     <thead>
                         <tr>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">Responsables</th>
-                          <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">grupo encargado</th>
+                            <th scope="col">Tiempo de respuesta</th>
+                            <th scope="col">Prioridad</th>
+                            <th>Acciones</th>
                         </tr>
-                      </thead>
-                      <tbody>
-                   
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td>
-                       
-                          </td>
-                        </tr>
-                        
-                      </tbody>
-                    </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($actividades as $actividad)
+                            <tr class="user-row">
+                                <td>{{ $actividad->name }}</td>
+                                <td>{{ $actividad->group ? $actividad->group->name : 'Sin grupo' }}</td>
+                                <td>{{ $actividad->priority }}</td>
+                                <td>{{ $actividad->time }}</td>
+                                <td>
+                                    <div class="flex gap-4 text-white items-center">
+                                        <a href="{{ route('activity.edit', $actividad->id) }}"
+                                            class="px-4 p-2 bg-blue-500 flex gap-2 rounded-md hover:bg-blue-400">
+                                            <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                viewBox="0 0 20 18">
+                                                <path
+                                                    d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z" />
+                                                <path
+                                                    d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
+                                            </svg>
+                                            Editar
+                                        </a>
+                                        <button
+                                            class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
+                                            href="#" data-id="{{ $actividad->id }}">
+                                            <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
+                                            </svg>
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-         $('#Table').DataTable();
-        });
-      </script>
-  
 </x-app-layout>
-

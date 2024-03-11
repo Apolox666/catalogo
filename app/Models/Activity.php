@@ -13,4 +13,15 @@ class Activity extends Model
         'name',
       
     ];
+
+  
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'groups_id');
+    }
+    protected $attributes = [
+        'priority' => 0,
+        'time' =>0,
+        'groups_id' =>0,
+    ];
 }

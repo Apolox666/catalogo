@@ -21,7 +21,7 @@
                     </span>
                 </button>
             </a>
-            <div class="overflow-hidden mb-8 w-full rounded-lg border shadow-xs">
+            <div class="overflow-x-auto mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
                     <thead>
                         <tr>
@@ -76,13 +76,7 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#Table').DataTable();
-        });
-    </script>
+   
     <script>
         $('.eliminar').click(function() {
             var id = $(this).data('id'); // Obtener el valor del atributo data-id

@@ -24,8 +24,9 @@ class UserController extends Controller
 
 
 
-        return view('usuarios.index', compact('usuarios'));
+        return view('usuarios.index',['success' => true], compact('usuarios'));
     }
+
     public function create()
     {
         return view('usuarios.create');

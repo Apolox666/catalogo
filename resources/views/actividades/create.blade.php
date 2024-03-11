@@ -18,17 +18,40 @@
                     @enderror
                 </div>
 
-                <x-input-label for="name" :value="__('Seleccione el tiempo de respuesta para esta actividad')" class="pt-8" />
-                <div class="mb-4">
-                    <select name="" id="">
-                        <option value="">Seleccione una opcion</option>
+                <x-input-label for="time" :value="__('Seleccione el tiempo de respuesta para esta actividad')" class="pt-8" />
+                <div class="mb-4 pt-4">
+                    <select name="time" id="">
+                        <option value="0">Seleccione una opcion</option>
+                        <option value="1">1 horas</option>
+                        <option value="2">2 horas</option>
+                        <option value="3">3 horas</option>
+                        <option value="4">4 horas</option>
+                        <option value="5">5 horas</option>
                     </select>
+                    @error('name')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
                 </div>
+                <x-input-label for="priority" :value="__('Seleccione el impacto o prioridad de esta actividad')" class="pt-8" />
+                <div class="mb-4 pt-4">
+                    <select name="priority" id="">
+                        <option value="0">Seleccione una opcion</option>
+                        <option value="1">Baja</option>
+                        <option value="2">Alta</option>
+                        <option value="3">Media</option>
+                        <option value="4">Critica</option>
+                    </select>
+                    @error('name')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
+                </div>
+
 
                 <!-- Email Address -->
                 <x-input-label for="name" :value="__('Seleccione quienes pertenecerán a este grupo')" class="pt-8" />
                 <div class="mb-4">
-                    <input type="text" id="search" class="form-input rounded-md my-4 shadow-sm" placeholder="Buscar por nombre">
+                    <input type="text" id="search" class="form-input rounded-md my-4 shadow-sm"
+                        placeholder="Buscar por nombre">
                 </div>
 
                 @error('groups')
