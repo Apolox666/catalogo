@@ -12,7 +12,9 @@ class ResponsibleControler extends Controller
      */
     public function index()
     {
-        $responsibles = Responsible::all();
+        $responsibles = Responsible::select('id', 'name', 'state')
+        ->where('state',1)
+        ->get();
         
         return (view('responsables.index', compact('responsibles')));
     }
@@ -114,7 +116,8 @@ class ResponsibleControler extends Controller
     {
         $user = Responsible::findOrFail($id);
 
-        $user->delete();
+        $user->state =0;
+        $user->save();
         return $resulta = "ok";
     }
 }

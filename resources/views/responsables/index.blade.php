@@ -4,6 +4,8 @@
     <div class="relative overflow-x-auto p-8">
         <div class="p-8 bg-white  shadow-xs rounded-xl">
             <h1 class=" text-black text-3xl py-8 font-bold">Responsables</h1>
+            
+            <!-- boton de añadir -->
             <a href="{{ route('responsible.create') }}">
                 <button
                     class="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border mb-4 border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500">
@@ -20,7 +22,12 @@
                         </svg>
                     </span>
                 </button>
-
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" value="" class="sr-only peer">
+                    <div
+                        class="group peer ring-0 bg-rose-400  rounded-full outline-none duration-300 after:duration-300 w-24 h-12  shadow-md peer-checked:bg-green-500  peer-focus:outline-none  after:content-['✖️']  after:rounded-full after:absolute after:bg-gray-50 after:outline-none after:h-10 after:w-10 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-12 peer-checked:after:content-['✔️'] peer-hover:after:scale-95">
+                    </div>
+                </label>
             </a>
             <div class="overflow-x-auto mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
@@ -34,7 +41,7 @@
                     <tbody>
                         @foreach ($responsibles as $responsible)
                             <tr class="user-row">
-                             
+
                                 <td>{{ $responsible->name }}</td>
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
@@ -61,6 +68,7 @@
                                             </svg>
                                             Eliminar
                                         </button>
+
                                     </div>
                                 </td>
                             </tr>
@@ -70,44 +78,44 @@
             </div>
         </div>
     </div>
- <script>
-    $('.eliminar').click(function() {
-        var id = $(this).data('id'); // Obtener el valor del atributo data-id
-        Swal.fire({
-            title: '¿Estás seguro de borrar este registro?',
-            text: "Es posible que este responsable esté asosciado a un grupo de trabajo",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Sí, borrar!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: 'DELETE',
-                    url: "{{ route('responsible.destroy', ':id') }}".replace(':id', id),
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(respuesta) {
-                        Swal.fire(
-                            'Éxito',
-                            'Cambios efectuados correctamente',
-                            'success'
-                        );
-                        // Eliminar el elemento eliminado de la interfaz
-                        $(`.eliminar[data-id=${id}]`).closest('.user-row').remove();
-                    },
-                    error: function(respuesta) {
-                        Swal.fire(
-                            'No se puede realizar esta accion',
-                            'Es probable que este responsable se encuentre dentro de un grupo de trabajo',
-                            'warning'
-                        );
-                    }
-                });
-            }
+    <script>
+        $('.eliminar').click(function() {
+            var id = $(this).data('id'); // Obtener el valor del atributo data-id
+            Swal.fire({
+                title: '¿Estás seguro de borrar este registro?',
+                text: "Es posible que este responsable esté asosciado a un grupo de trabajo",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, borrar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: "{{ route('responsible.destroy', ':id') }}".replace(':id', id),
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(respuesta) {
+                            Swal.fire(
+                                'Éxito',
+                                'Cambios efectuados correctamente',
+                                'success'
+                            );
+                            // Eliminar el elemento eliminado de la interfaz
+                            $(`.eliminar[data-id=${id}]`).closest('.user-row').remove();
+                        },
+                        error: function(respuesta) {
+                            Swal.fire(
+                                'No se puede realizar esta accion',
+                                'Es probable que este responsable se encuentre dentro de un grupo de trabajo',
+                                'warning'
+                            );
+                        }
+                    });
+                }
+            });
         });
-    });
-</script>
+    </script>
 </x-app-layout>

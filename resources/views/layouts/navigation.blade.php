@@ -1,7 +1,7 @@
 <aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
     <div class="py-4 text-gray-500">
-        <a class="ml-6 text-lg font-bold text-gray-800" href="{{ route('dashboard') }}">
-            <img src="{{ asset('images/logo.png') }}" width="100px" alt="">
+        <a class="flex px-6  py-4 text-lg font-bold items-center text-gray-800" href="{{ route('dashboard') }}">
+            <img src="{{ asset('images/logoti.png') }}" width="190px" alt="">
         </a>
 
         <ul class="flex  flex-col gap-4 mt-6">

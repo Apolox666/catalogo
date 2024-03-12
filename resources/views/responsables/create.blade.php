@@ -7,7 +7,7 @@
             <form method="POST" class="p-6" action="{{ route('responsible.store') }}">
                 @csrf
 
-                <!-- Name -->
+                <!-- nombre -->
                 <div> 
                     <x-input-label for="first_name" :value="__('Primer nombre *')" />
                     <x-text-input id="first_name"
@@ -18,6 +18,8 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <!-- segundo nombre -->
                 <div class="mt-12"> 
                     <x-input-label for="second_name" :value="__('Segundo nombre ')" />
                     <x-text-input id="second_name"
@@ -28,6 +30,8 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <!-- primer apellido -->
                 <div class="mt-12"> 
                     <x-input-label for="first_surname" :value="__('Primer apellido *')" />
                     <x-text-input id="first_surname"
@@ -38,6 +42,8 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <!-- segundo apellido -->
                 <div class="mt-12"> 
                     <x-input-label for="second_surname" :value="__('Segundo apellido *')" />
                     <x-text-input id="second_surname"
@@ -48,6 +54,8 @@
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <!-- acciones -->
                 <div class="flex items-center justify-end mt-4">
                     <x-cancel-button class="ms-4">
                         {{ __('Cancelar') }}

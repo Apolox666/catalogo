@@ -10,7 +10,7 @@
     <title>Home</title>
     <style>
         .image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{ asset('images/dashboard.png') }}");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{ asset('images/hero.jpg') }}");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -22,7 +22,7 @@
     <header class="bg-gray-100 h-20 shadow-md fixed w-full z-50">
         <nav class="flex mx-auto max-w-[1200px] w-[90%] overflow-hidden items-center h-full justify-between">
             <a href="">
-                <img src="{{ asset('/images/logo-supergiros.png') }}" alt="" width="180px">
+                <img src="{{ asset('images/logoti.png') }}" alt="" width="190px">
             </a>
 
             <ul class="flex gap-8 font-bold text-lg">

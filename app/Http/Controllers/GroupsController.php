@@ -22,7 +22,9 @@ class GroupsController extends Controller
      */
     public function create()
     {
-        $responsibles = Responsible::all();
+        $responsibles = Responsible::select('id', 'name', 'state')
+        ->where('state',1)
+        ->get();
         return (view('grupos.create', compact('responsibles')));
     }
 

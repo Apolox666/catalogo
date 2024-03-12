@@ -36,11 +36,15 @@
                                 <td>{{ $group->name }}</td>
                                 <td>
                                     <ul class="flex flex-col">
-                                        @foreach ($group->responsibles as $responsible)
-                                            <li>{{ $responsible->name }}</li>
-                                        @endforeach
-                                    </ul>
 
+                                        @if ($group->responsibles->where('state', 1)->isEmpty())
+                                            <p>(No hay responsables registrados)</p>
+                                        @else
+                                            @foreach ($group->responsibles->where('state', 1) as $responsible)
+                                                <li>{{ $responsible->name }}</li>
+                                            @endforeach
+                                        @endif
+                                    </ul>
                                 </td>
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
@@ -76,7 +80,7 @@
             </div>
         </div>
     </div>
-   
+
     <script>
         $('.eliminar').click(function() {
             var id = $(this).data('id'); // Obtener el valor del atributo data-id

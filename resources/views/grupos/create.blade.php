@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        {{ __('Users') }}
-    </x-slot>
 
     <div class="relative overflow-x-auto p-8">
         <div class="p-4 bg-white rounded-lg shadow-xs">
@@ -9,7 +6,7 @@
             <form method="POST" class="p-6" action="{{ route('group.store') }}">
                 @csrf
 
-                <!-- Name -->
+                <!-- nombre -->
                 <div>
                     <x-input-label for="name" :value="__('Nombre del grupo')" />
                     <x-text-input id="name"
@@ -21,6 +18,7 @@
                     @enderror
                 </div>
 
+                <!-- seleccion de responsables -->
                 <x-input-label for="name" :value="__('Seleccione quienes pertenecerán a este grupo')" class="pt-8" />
                 <div class="mb-4">
                     <input type="text" id="search" class="form-input rounded-md my-4 shadow-sm" placeholder="Buscar por nombre">
@@ -30,9 +28,10 @@
                     <p class="text-red-700 text-xs">{{ $message }}</p>
                 @enderror
                 <div class="flex flex-wrap gap-8" id="responsibles-container">
-                    @foreach ($responsibles as $responsible)
+
+                    @foreach ($responsibles as $responsible) <!-- Este foreach trae los responsables en chekboxes para mostrarlos en el formulario -->
                         <div class="w-1/4 flex items-center gap-4 responsible">
-                            <input type="checkbox" name="responsibles[]" value="{{ $responsible->id }}">
+                            <input type="checkbox" name="responsibles[]" value="{{ $responsible->id }}">  <!-- mediante [] se estipula que que la informacion es un array -->
                             <p>{{ $responsible->name }}</p>
                         </div>
                     @endforeach
@@ -49,7 +48,7 @@
             </form>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#search').on('input', function() {

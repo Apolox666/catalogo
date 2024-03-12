@@ -28,12 +28,12 @@
                     <p class="text-red-700 text-xs">{{ $message }}</p>
                 @enderror
                 <div class="flex flex-wrap gap-8" id="responsibles-container">
-                    @foreach ($responsibles as $responsible)
+                    @foreach ($responsibles->where('state', 1) as $responsible)
                         <div class="flex gap-8 pt-10">
                             <div class="flex items-center gap-4 responsible">
                                 <input type="checkbox" name="responsibles[]" value="{{ $responsible->id }}"
                                     {{ $group->responsibles->contains($responsible->id) ? 'checked' : '' }}>
-                                    <p>{{ $responsible->name }}</p>
+                                <p>{{ $responsible->name }}</p>
                             </div>
                         </div>
                     @endforeach
