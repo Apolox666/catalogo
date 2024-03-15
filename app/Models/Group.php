@@ -11,9 +11,17 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',    
+        'name',
     ];
+    
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::creating(function ($group) {
+            $group->state = 1;
+        });
+    }
     public function responsibles()
     {
         return $this->belongsToMany(Responsible::class);

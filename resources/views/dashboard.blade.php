@@ -7,11 +7,11 @@
 
                 <div class=" gap-x-20">
                     <div>
-                        <h2 class="text-2xl font-bold mb-4">Resumen</h2>
+                        <h2 class="text-2xl font-bold mb-4">Resumen del catalogo TI</h2>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-2">
-                                <div class="p-4 bg-green-100 rounded-xl">
+                                <div class="p-4 bg-green-400 rounded-xl">
                                     <div class="font-bold text-xl text-gray-800 leading-none">Listado de productos
                                     </div>
                                     <div class="mt-5">
@@ -22,16 +22,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-4 bg-yellow-100 rounded-xl text-gray-800">
+                            <div class="p-4 bg-yellow-300 rounded-xl text-gray-800">
                                 <div class="font-bold text-2xl leading-none">20</div>
                                 <div class="mt-2">Servicios activos</div>
                             </div>
-                            <div class="p-4 bg-blue-200 rounded-xl text-gray-800">
-                                <div class="font-bold text-2xl leading-none">5,5</div>
-                                <div class="mt-2"></div>grupos de trabajo
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-4 bg-blue-500 font-bold rounded-xl text-white">
+                                    <div class="font-bold text-2xl leading-none">{{ $groups }}</div>
+                                    <div class="mt-2"></div>grupos de trabajo
+                                </div>
+                                <div class="p-4 bg-indigo-500 font-bold rounded-xl text-white">
+                                    <div class="font-bold text-2xl leading-none">{{ $responsible }}</div>
+                                    <div class="mt-2"></div>Responsables activos
+                                </div>
                             </div>
+
+
                             <div class="col-span-2">
-                                <div class="p-4 bg-purple-100 rounded-xl text-gray-800">
+                                <div class="p-4 bg-purple-500 rounded-xl text-gray-800">
                                     <div class="font-bold text-xl leading-none">Total actividades</div>
                                     <div class="mt-2">0</div>
                                 </div>

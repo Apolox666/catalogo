@@ -1,10 +1,11 @@
 <x-app-layout>
 
 
+
     <div class="relative overflow-x-auto p-8">
         <div class="p-8 bg-white  shadow-xs rounded-xl">
             <h1 class=" text-black text-3xl py-8 font-bold">Responsables</h1>
-            
+
             <!-- boton de añadir -->
             <a href="{{ route('responsible.create') }}">
                 <button
@@ -22,12 +23,7 @@
                         </svg>
                     </span>
                 </button>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" class="sr-only peer">
-                    <div
-                        class="group peer ring-0 bg-rose-400  rounded-full outline-none duration-300 after:duration-300 w-24 h-12  shadow-md peer-checked:bg-green-500  peer-focus:outline-none  after:content-['✖️']  after:rounded-full after:absolute after:bg-gray-50 after:outline-none after:h-10 after:w-10 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-12 peer-checked:after:content-['✔️'] peer-hover:after:scale-95">
-                    </div>
-                </label>
+               
             </a>
             <div class="overflow-x-auto mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
@@ -59,7 +55,8 @@
                                         </a>
                                         <button
                                             class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
-                                            href="#" data-id="{{ $responsible->id }}">
+                                            href="#" data-id="{{ $responsible->id }}"
+                                            data-url="{{ route('responsible.destroy', $responsible->id) }}">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                                                 <path stroke="currentColor" stroke-linecap="round"
@@ -83,7 +80,7 @@
             var id = $(this).data('id'); // Obtener el valor del atributo data-id
             Swal.fire({
                 title: '¿Estás seguro de borrar este registro?',
-                text: "Es posible que este responsable esté asosciado a un grupo de trabajo",
+                text: "Es posible que este responsable esté asosciado a un grupo de trabajo, dejará de ser visible alli",
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -109,7 +106,7 @@
                         error: function(respuesta) {
                             Swal.fire(
                                 'No se puede realizar esta accion',
-                                'Es probable que este responsable se encuentre dentro de un grupo de trabajo',
+                                'Ocurrio un error al borrar este registro',
                                 'warning'
                             );
                         }
@@ -118,4 +115,17 @@
             });
         });
     </script>
+    @if (Session::has('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Éxito',
+                    text: '{{ Session::get('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    @endif
+   
 </x-app-layout>

@@ -13,19 +13,20 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
     public function index()
     {
-        
+
         $users = User::paginate();
 
         $usuarios = User::all();
 
 
 
-        return view('usuarios.index',['success' => true], compact('usuarios'));
+        return view('usuarios.index', ['success' => true], compact('usuarios'));
     }
 
     public function create()
@@ -53,7 +54,7 @@ class UserController extends Controller
             'password.confirmed' => 'Las contraseñas no coinciden.',
             // Añade más mensajes según tus necesidades
         ];
-    
+
         $validator = $request->validate([
             'name' => ['required', 'string', 'max:28', 'regex:/^[a-zA-Z\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
@@ -67,9 +68,10 @@ class UserController extends Controller
             $user->password = Hash::make($request->input('password'));
             $user->email = $request->input('email');
             $user->save();
-            return redirect(route('user.index'));
+            Session::flash('success', 'El responsable se ha creado correctamente.');
+            return redirect()->route('user.index')->with('success', 'El usuario ha sido creado.');
         } catch (\Exception $e) {
-            // Handle the exception if any unexpected error occurs
+            return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el usuario.');
             throw $e;
         }
     }
@@ -121,10 +123,19 @@ class UserController extends Controller
         // Verificar la unicidad del correo electrónico excluyendo el usuario actual
 
         // Actualizar otros campos
-        $user->name = $request->input('name');
-        $user->password = Hash::make($request->input('password'));
-        $user->email = $request->input('email');
-        $user->save();
+        try {
+
+            $user->name = $request->input('name');
+            $user->password = Hash::make($request->input('password'));
+            $user->email = $request->input('email');
+            $user->save();
+            return (redirect('user.index'));
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el usuario.');
+            throw $e;
+        }
+
+
 
         // Redireccionar o realizar otras acciones después de la actualización
         return redirect(route('user.index'));

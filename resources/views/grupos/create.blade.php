@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="relative overflow-x-auto p-8">
-        <div class="p-4 bg-white rounded-lg shadow-xs">
+        <div class="p-8 bg-white rounded-lg shadow-xs">
             <h1 class=" text-black text-3xl py-8 font-bold">Crear grupo de trabajo</h1>
             <form method="POST" class="p-6" action="{{ route('group.store') }}">
                 @csrf
@@ -30,7 +30,7 @@
                 <div class="flex flex-wrap gap-8" id="responsibles-container">
 
                     @foreach ($responsibles as $responsible) <!-- Este foreach trae los responsables en chekboxes para mostrarlos en el formulario -->
-                        <div class="w-1/4 flex items-center gap-4 responsible">
+                        <div class="w-1/4 flex items-center gap-4 search">
                             <input type="checkbox" name="responsibles[]" value="{{ $responsible->id }}">  <!-- mediante [] se estipula que que la informacion es un array -->
                             <p>{{ $responsible->name }}</p>
                         </div>
@@ -48,20 +48,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $('#search').on('input', function() {
-                var searchText = $(this).val().trim().toLowerCase();
-                $('.responsible').each(function() {
-                    var name = $(this).find('p').text().trim().toLowerCase();
-                    if (name.includes(searchText)) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                });
-            });
-        });
-    </script>
+     <script src="{{asset('js/search.js')}}"></script>
 </x-app-layout>

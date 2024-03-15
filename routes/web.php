@@ -14,7 +14,9 @@ Route::get('/', function () {
 
 /* Esta ruta valida que el usuaro esté logueado para pasarlo al dashboard admin */
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $groups = App\Models\Group::where('state',1)->count();
+    $responsible = App\Models\Responsible::where('state',1)->count();
+    return view('dashboard', ['groups'=>$groups, 'responsible'=>$responsible]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 /* Estas rutas son las llamadas de los controladores resources que facilitan los CRUD usados */

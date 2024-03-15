@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                         @foreach ($groups as $group)
-                            <tr class="group-row">
+                            <tr class="group-row border-b border-gray-700">
                                 <td>{{ $group->name }}</td>
                                 <td>
                                     <ul class="flex flex-col">
@@ -85,8 +85,8 @@
         $('.eliminar').click(function() {
             var id = $(this).data('id'); // Obtener el valor del atributo data-id
             Swal.fire({
-                title: '¿Estás seguro de borrar este registro?',
-                text: "Es posible que este responsable esté asosciado a un grupo de trabajo",
+                title: '¿Estás seguro de borrar este grupo?',
+                text: "El grupo eliminado dejará de ser visible, esta accion no se puede deshacer",
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -121,4 +121,15 @@
             });
         });
     </script>
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    title: 'Éxito',
+                    text: '{{ session('success') }}',
+                    icon: 'success'
+                });
+            });
+        </script>
+    @endif
 </x-app-layout>

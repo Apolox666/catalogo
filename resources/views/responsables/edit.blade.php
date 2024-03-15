@@ -1,6 +1,5 @@
 <x-app-layout>
    
-
     <div class="relative overflow-x-auto p-8">
         <div class="p-4 bg-white rounded-lg shadow-xs">
             <h1 class=" text-black text-3xl py-8 font-bold">Editar responsable</h1>

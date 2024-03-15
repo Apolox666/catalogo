@@ -13,7 +13,9 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
+        $groups = Group::select('id', 'name', 'state')
+            ->where('state', 1)
+            ->get();
         return (view('grupos.index', compact('groups')));
     }
 
@@ -23,8 +25,8 @@ class GroupsController extends Controller
     public function create()
     {
         $responsibles = Responsible::select('id', 'name', 'state')
-        ->where('state',1)
-        ->get();
+            ->where('state', 1)
+            ->get();
         return (view('grupos.create', compact('responsibles')));
     }
 
@@ -50,7 +52,7 @@ class GroupsController extends Controller
         // Crea un nuevo grupo
         $group = Group::create([
             'name' => $request->name,
-
+        
         ]);
 
         // Asocia los responsables seleccionados con el grupo
@@ -89,7 +91,7 @@ class GroupsController extends Controller
         $messages = [
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
-            'name.regex' => 'El campo  solo debe contener letras y espacios.', 
+            'name.regex' => 'El campo  solo debe contener letras y espacios.',
         ];
 
         // Valida los datos del formulario
@@ -115,8 +117,8 @@ class GroupsController extends Controller
     public function destroy(string $id)
     {
         $group = Group::findOrFail($id);
-
-        $group->delete();
+        $group->state = 0;
+        $group->save();
         return $resulta = "ok";
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Responsible;
+use Illuminate\Support\Facades\Session;
 
 class ResponsibleControler extends Controller
 {
@@ -13,9 +14,9 @@ class ResponsibleControler extends Controller
     public function index()
     {
         $responsibles = Responsible::select('id', 'name', 'state')
-        ->where('state',1)
-        ->get();
-        
+            ->where('state', 1)
+            ->get();
+
         return (view('responsables.index', compact('responsibles')));
     }
 
@@ -40,24 +41,25 @@ class ResponsibleControler extends Controller
         ];
         $validator = $request->validate([
             'first_name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
-           
+
         ], $messages);
-    
+
         $first_name = ucfirst($request->input('first_name'));
         $second_name = ucfirst($request->input('second_name'));
         $first_surname = ucfirst($request->input('first_surname'));
         $second_surname = ucfirst($request->input('second_surname'));
-    
+
         // Construir el nombre completo
         $name = trim("$first_name $second_name $first_surname $second_surname");
-    
+
         try {
             // Guardar el responsable en la base de datos
             $responsible = new Responsible();
             $responsible->name = $name;
+            $responsible->state = 1;
             $responsible->save();
-    
-            return redirect()->route('responsible.index')->with('success', 'El responsable se ha creado correctamente.');
+            Session::flash('success', 'El responsable se ha creado correctamente.');
+            return redirect()->route('responsible.index')->with('success', 'El responsable ha sido creado.');
         } catch (\Exception $e) {
             // Manejar la excepción si ocurre algún error inesperado
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
@@ -78,7 +80,7 @@ class ResponsibleControler extends Controller
     public function edit(string $id)
     {
         $responsible = Responsible::findOrFail($id);
-        return(view('responsables.edit', compact('responsible')));
+        return (view('responsables.edit', compact('responsible')));
     }
 
     /**
@@ -86,11 +88,11 @@ class ResponsibleControler extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+
         $messages = [
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
-            'name.regex' => 'El campo Nombre solo debe contener letras y espacios.', 
+            'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
         ];
 
         $responsible = Responsible::find($id);
@@ -103,6 +105,7 @@ class ResponsibleControler extends Controller
 
         // Actualizar otros campos
         $responsible->name = $request->input('name');
+        $responsible->state = 1;
         $responsible->save();
 
         // Redireccionar o realizar otras acciones después de la actualización
@@ -116,8 +119,8 @@ class ResponsibleControler extends Controller
     {
         $user = Responsible::findOrFail($id);
 
-        $user->state =0;
+        $user->state = 0;
         $user->save();
-        return $resulta = "ok";
+        return response()->json(['message' => 'El responsable ha sido eliminado correctamente'], 200);
     }
 }

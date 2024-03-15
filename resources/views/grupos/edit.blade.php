@@ -27,21 +27,25 @@
                 @error('responsibles')
                     <p class="text-red-700 text-xs">{{ $message }}</p>
                 @enderror
+
                 <div class="flex flex-wrap gap-8" id="responsibles-container">
                     @foreach ($responsibles->where('state', 1) as $responsible)
-                        <div class="flex gap-8 pt-10">
-                            <div class="flex items-center gap-4 responsible">
-                                <input type="checkbox" name="responsibles[]" value="{{ $responsible->id }}"
-                                    {{ $group->responsibles->contains($responsible->id) ? 'checked' : '' }}>
-                                <p>{{ $responsible->name }}</p>
-                            </div>
+                        <div class="w-1/4 flex items-center gap-4 search">
+
+                            <input type="checkbox" name="responsibles[]" value="{{ $responsible->id }}"
+                                {{ $group->responsibles->contains($responsible->id) ? 'checked' : '' }}>
+                            <p>{{ $responsible->name }}</p>
+
                         </div>
                     @endforeach
                 </div>
                 <div class="flex items-center justify-end mt-4">
-                    <x-cancel-button class="ms-4">
-                        {{ __('Cancelar') }}
-                    </x-cancel-button>
+                    <a href="{{ route('group.index') }}">
+                        <button
+                            class="inline-flex items-center px-4 py-4 bg-red-500 shadow-md border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-400 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            Cancelar
+                        </button>
+                    </a>
                     <x-primary-button class="ms-4">
                         {{ __('Editar') }}
                     </x-primary-button>
@@ -49,20 +53,5 @@
             </form>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#search').on('input', function() {
-                var searchText = $(this).val().trim().toLowerCase();
-                $('.responsible').each(function() {
-                    var name = $(this).find('p').text().trim().toLowerCase();
-                    if (name.includes(searchText)) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="{{asset('js/search.js')}}"></script>
 </x-app-layout>
