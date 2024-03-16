@@ -31,9 +31,7 @@
             @include('layouts.top-menu')
             <main class="h-full overflow-y-auto bg-gray-200">
                 {{ $slot }}
-                <div class="h-8 py-10 bg-white text-gray-600">
-                    <p>Todos los derechos reservados @yo jiji</p>
-                </div>
+                @include('layouts.footer')
             </main>
         </div>
 

@@ -1,6 +1,6 @@
 <x-app-layout>
 
-
+    
     <div class="relative overflow-x-auto p-8">
         <div class="p-8 bg-white  shadow-xs rounded-xl">
             <h1 class=" text-black text-3xl py-8 font-bold">Usuarios administradores del sistema</h1>
@@ -77,46 +77,9 @@
             </div>
         </div>
     </div>
-    <script>
-        $('.eliminar').click(function() {
-            var id = $(this).data('id'); // Obtener el valor del atributo data-id
-            Swal.fire({
-                title: '¿Estás seguro de borrar este usuario?',
-                text: "El usuario no podrá ingresar al sistema, esta operacion no se puede deshacer ",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '¡Sí, borrar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: 'DELETE',
-                        url: "{{ route('user.destroy', ':id') }}".replace(':id', id),
-                        data: {
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: function(respuesta) {
-                            Swal.fire(
-                                'Éxito',
-                                'Cambios efectuados correctamente',
-                                'success'
-                            );
-                            // Eliminar el elemento eliminado de la interfaz
-                            $(`.eliminar[data-id=${id}]`).closest('.user-row').remove();
-                        },
-                        error: function(respuesta) {
-                            Swal.fire(
-                                'No se puede realizar esta accion',
-                                'Este grupo contiene responsables asociados',
-                                'warning'
-                            );
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+    @push('scripts')
+    <script src="{{ asset('js/eliminar.js') }}"></script>
+@endpush
     @if (Session::has('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -129,4 +92,5 @@
             });
         </script>
     @endif
+ 
 </x-app-layout>

@@ -37,27 +37,34 @@ class ActivitiesController extends Controller
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
-
+            'not_in' => 'Por favor, seleccione una opción válida.',
         ];
-
+    
+        
         $request->validate([
             'name' => 'required|string|max:355',
             'groups' => 'required',
-            'time' => 'required',
             'priority' => 'required',
-
+            'time_type' => 'required',
+            'time_hours' => 'required_without:time_days',
+            'time_days' => 'required_without:time_hours',
         ], $messages);
-
-
+    
+        
+       
         // Crea un nuevo grupo
         $activity = new Activity();
         $activity->name = $request->name;
         $activity->groups_id = $request->groups; // Asigna el ID del grupo seleccionado
         $activity->priority = $request->input('priority');
-        $activity->time = $request->input('time');
-        $activity->state = 1;
+        if ($request->input('time_type') == 'hours') {
+            $activity->time = $request->input('time_hours');
+        } elseif ($request->input('time_type') == 'days') {
+            $activity->time = $request->input('time_days');
+        }
+        $activity->state =1;
         $activity->save();
-
+       
         return redirect(route('activity.index'));
     }
 
