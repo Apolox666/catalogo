@@ -121,15 +121,6 @@
             });
         });
     </script>
-    @if (session('success'))
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    title: 'Éxito',
-                    text: '{{ session('success') }}',
-                    icon: 'success'
-                });
-            });
-        </script>
-    @endif
+
+   
 </x-app-layout>

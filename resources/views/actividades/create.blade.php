@@ -129,9 +129,12 @@
 
 
                 <div class="flex items-center justify-end mt-4">
-                    <x-cancel-button class="ms-4">
-                        {{ __('Cancelar') }}
-                    </x-cancel-button>
+                    <a href="{{ route('activity.index') }}">
+                        <button
+                            class="inline-flex items-center px-4 py-4 bg-red-500 shadow-md border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-400 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            Cancelar
+                        </button>
+                    </a>
                     <x-primary-button class="ms-4">
                         {{ __('Registrar') }}
                     </x-primary-button>

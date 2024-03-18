@@ -75,6 +75,7 @@
             </div>
         </div>
     </div>
+  
     <script>
         $('.eliminar').click(function() {
             var id = $(this).data('id'); // Obtener el valor del atributo data-id
@@ -115,17 +116,5 @@
             });
         });
     </script>
-    @if (Session::has('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    title: 'Éxito',
-                    text: '{{ Session::get('success') }}',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    @endif
-   
+    
 </x-app-layout>

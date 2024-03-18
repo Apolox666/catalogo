@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    
+
     <div class="relative overflow-x-auto p-8">
         <div class="p-8 bg-white  shadow-xs rounded-xl">
             <h1 class=" text-black text-3xl py-8 font-bold">Usuarios administradores del sistema</h1>
@@ -78,19 +78,7 @@
         </div>
     </div>
     @push('scripts')
-    <script src="{{ asset('js/eliminar.js') }}"></script>
-@endpush
-    @if (Session::has('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    title: 'Éxito',
-                    text: '{{ Session::get('success') }}',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    @endif
- 
+        <script src="{{ asset('js/eliminar.js') }}"></script>
+    @endpush
+   
 </x-app-layout>

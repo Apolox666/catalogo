@@ -8,7 +8,6 @@
                 <div class=" gap-x-20">
                     <div>
                         <h2 class="text-2xl font-bold mb-4">Resumen del catalogo TI</h2>
-
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-2">
                                 <div class="p-4 bg-green-400 rounded-xl">
@@ -39,9 +38,9 @@
 
 
                             <div class="col-span-2">
-                                <div class="p-4 bg-purple-500 rounded-xl text-gray-800">
+                                <div class="p-4 bg-purple-500 rounded-xl text-white">
                                     <div class="font-bold text-xl leading-none">Total actividades</div>
-                                    <div class="mt-2">0</div>
+                                    <div class="mt-2">{{$activity}}</div>
                                 </div>
                             </div>
                         </div>

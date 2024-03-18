@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Responsible;
-use Illuminate\Support\Facades\Session;
+
 
 class ResponsibleControler extends Controller
 {
@@ -58,11 +58,12 @@ class ResponsibleControler extends Controller
             $responsible->name = $name;
             $responsible->state = 1;
             $responsible->save();
-            Session::flash('success', 'El responsable se ha creado correctamente.');
-            return redirect()->route('responsible.index')->with('success', 'El responsable ha sido creado.');
+
+            return redirect()->route('responsible.index');
         } catch (\Exception $e) {
             // Manejar la excepción si ocurre algún error inesperado
-            return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
+            return response()->json(['success' => '¡Usuario creado exitosamente!'], Response::HTTP_OK);
+            throw $e;
         }
     }
 
@@ -104,9 +105,15 @@ class ResponsibleControler extends Controller
         // Verificar la unicidad del correo electrónico excluyendo el usuario actual
 
         // Actualizar otros campos
-        $responsible->name = $request->input('name');
-        $responsible->state = 1;
-        $responsible->save();
+        try {
+            $responsible->name = $request->input('name');
+            $responsible->state = 1;
+            $responsible->save();
+        } catch (\Throwable $th) {
+            return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
+            throw $th;
+        }
+
 
         // Redireccionar o realizar otras acciones después de la actualización
         return redirect(route('responsible.index'));
@@ -119,8 +126,13 @@ class ResponsibleControler extends Controller
     {
         $user = Responsible::findOrFail($id);
 
-        $user->state = 0;
-        $user->save();
-        return response()->json(['message' => 'El responsable ha sido eliminado correctamente'], 200);
+        try {
+            $user->state = 0;
+            $user->save();
+            return response()->json(['message' => 'El responsable ha sido eliminado correctamente'], 200);
+        } catch (\Throwable $th) {
+            return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
+            throw $th;
+        }
     }
 }

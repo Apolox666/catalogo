@@ -128,8 +128,9 @@ class UserController extends Controller
             $user->name = $request->input('name');
             $user->password = Hash::make($request->input('password'));
             $user->email = $request->input('email');
+
             $user->save();
-            return (redirect('user.index'));
+            return (redirect(route('user.index')));
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el usuario.');
             throw $e;

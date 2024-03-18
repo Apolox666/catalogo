@@ -59,7 +59,7 @@ class GroupsController extends Controller
         $group->responsibles()->attach($request->responsibles);
 
         // Redirecciona a la página de inicio o donde sea adecuado
-        return redirect()->route('group.index')->with('success', 'Grupo creado exitosamente.');
+        return redirect()->route('group.index');
     }
 
     /**
