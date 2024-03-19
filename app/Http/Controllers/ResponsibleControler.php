@@ -63,7 +63,7 @@ class ResponsibleControler extends Controller
         } catch (\Exception $e) {
             // Manejar la excepción si ocurre algún error inesperado
             return response()->json(['success' => '¡Usuario creado exitosamente!'], Response::HTTP_OK);
-            throw $e;
+          
         }
     }
 
@@ -111,7 +111,7 @@ class ResponsibleControler extends Controller
             $responsible->save();
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
-            throw $th;
+            
         }
 
 
@@ -132,7 +132,7 @@ class ResponsibleControler extends Controller
             return response()->json(['message' => 'El responsable ha sido eliminado correctamente'], 200);
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
-            throw $th;
+           
         }
     }
 }

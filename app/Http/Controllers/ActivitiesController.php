@@ -39,8 +39,8 @@ class ActivitiesController extends Controller
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
             'not_in' => 'Por favor, seleccione una opción válida.',
         ];
-    
-        
+
+
         $request->validate([
             'name' => 'required|string|max:355',
             'groups' => 'required',
@@ -49,9 +49,9 @@ class ActivitiesController extends Controller
             'time_hours' => 'required_without:time_days',
             'time_days' => 'required_without:time_hours',
         ], $messages);
-    
-        
-       
+
+
+
         // Crea un nuevo grupo
         $activity = new Activity();
         $activity->name = $request->name;
@@ -62,9 +62,9 @@ class ActivitiesController extends Controller
         } elseif ($request->input('time_type') == 'days') {
             $activity->time = $request->input('time_days');
         }
-        $activity->state =1;
+        $activity->state = 1;
         $activity->save();
-       
+
         return redirect(route('activity.index'));
     }
 
@@ -77,14 +77,50 @@ class ActivitiesController extends Controller
 
     public function edit(string $id)
     {
-        $actividades = Activity::all();
-        return (view('actividades.edit', compact('actividades')));
+        $grupos = Group::select('id', 'name', 'state')
+        ->where('state', 1)
+        ->get();
+        $actividades = Activity::findOrFail($id);
+        return (view('actividades.edit', compact('actividades', 'grupos')));
     }
 
 
     public function update(Request $request, string $id)
     {
-        //
+        $messages = [
+            'required' => 'Este campo es obligatorio.',
+            'name.max' => 'El nombre introducido es muy largo',
+            'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+            'not_in' => 'Por favor, seleccione una opción válida.',
+        ];
+
+
+        $request->validate([
+            'name' => 'required|string|max:355',
+            'groups' => 'required',
+            'priority' => 'required',
+            'time_type' => 'required',
+            'time_hours' => 'required_without:time_days',
+            'time_days' => 'required_without:time_hours',
+        ], $messages);
+
+        $activity = Activity::find($id);
+        try {
+            $activity->name = $request->name;
+            $activity->groups_id = $request->groups; // Asigna el ID del grupo seleccionado
+            $activity->priority = $request->input('priority');
+            if ($request->input('time_type') == 'hours') {
+                $activity->time = $request->input('time_hours');
+            } elseif ($request->input('time_type') == 'days') {
+                $activity->time = $request->input('time_days');
+            }
+            $activity->state = 1;
+            $activity->save();
+
+            return redirect(route('activity.index'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
