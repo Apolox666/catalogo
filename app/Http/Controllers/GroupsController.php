@@ -16,7 +16,7 @@ class GroupsController extends Controller
         $groups = Group::select('id', 'name', 'state')
             ->where('state', 1)
             ->get();
-        return (view('grupos.index', compact('groups')));
+        return (view('modulos/grupos.index', compact('groups')));
     }
 
     /**
@@ -27,7 +27,7 @@ class GroupsController extends Controller
         $responsibles = Responsible::select('id', 'name', 'state')
             ->where('state', 1)
             ->get();
-        return (view('grupos.create', compact('responsibles')));
+        return (view('modulos/grupos.create', compact('responsibles')));
     }
 
     /**
@@ -77,7 +77,7 @@ class GroupsController extends Controller
     {
         $group = Group::findOrFail($id);
         $responsibles = Responsible::all();
-        return view('grupos.edit', compact('group', 'responsibles'));
+        return view('modulos/grupos.edit', compact('group', 'responsibles'));
     }
 
     /**

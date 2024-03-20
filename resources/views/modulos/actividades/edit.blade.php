@@ -4,14 +4,15 @@
     <div class="relative overflow-x-auto p-8">
         <div class="p-4 bg-white rounded-lg shadow-xs">
             <h1 class=" text-black text-3xl p-8 font-bold">Registrar una actividad</h1>
-            <form method="POST" class="p-6" action="{{ route('activity.store') }}">
+            <form method="POST" class="p-6" action="{{ route('activity.update', $actividades->id) }}">
                 @csrf
+                @method('PATCH')
                 <!-- Name -->
                 <div>
                     <x-input-label for="name" :value="__('Nombre')" />
                     <x-text-input id="name"
                         class="block mt-1 w-full {{ $errors->has('name') ? 'border-red-600' : '' }}" type="text"
-                        name="name" :value="old('name')" autofocus autocomplete="name" />
+                        name="name" value="{{$actividades->name}}" autofocus autocomplete="name" />
 
                     @error('name')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
@@ -98,8 +99,8 @@
                     <select name="priority" id="">
                         <option value="0">Seleccione una opcion</option>
                         <option value="baja">Baja</option>
-                        <option value="alta">Alta</option>
                         <option value="media">Media</option>
+                        <option value="alta">Alta</option>
                         <option value="critica">Critica</option>
                     </select>
                     @error('name')
@@ -108,7 +109,7 @@
                 </div>
 
 
-
+                <!-- Email Address -->
                 <x-input-label for="name" :value="__('Seleccione a grupo pertenecerá esta actividad')" class="pt-8" />
                 <div class="mb-4">
                     <input type="text" id="search" class="form-input rounded-md my-4 shadow-sm"
@@ -118,10 +119,11 @@
                 @error('groups')
                     <p class="text-red-700 text-xs">{{ $message }}</p>
                 @enderror
+                <x-input-label for="groups" :value="__('Seleccione el grupo al que pertenecerá esta actividad')" class="pt-8" />
                 <div class="flex flex-wrap gap-8" id="groups-container">
                     @foreach ($grupos as $grupo)
-                        <div class="w-1/4 flex items-center gap-4 search">
-                            <input type="radio" name="groups" value="{{ $grupo->id }}">
+                        <div class="w-1/4 flex items-center gap-4 group">
+                            <input type="radio" name="groups" value="{{ $grupo->id }}" {{ $actividades->group->id == $grupo->id ? 'checked' : '' }}>
                             <p>{{ $grupo->name }}</p>
                         </div>
                     @endforeach
@@ -133,13 +135,12 @@
                         {{ __('Cancelar') }}
                     </x-cancel-button>
                     <x-primary-button class="ms-4">
-                        {{ __('Registrar') }}
+                        {{ __('Editar') }}
                     </x-primary-button>
                 </div>
             </form>
         </div>
     </div>
-
     <script src="{{ asset('js/timeselect.js') }}"></script>
     <script src="{{ asset('js/search.js') }}"></script>
 

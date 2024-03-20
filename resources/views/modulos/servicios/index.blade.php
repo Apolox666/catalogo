@@ -1,10 +1,10 @@
 <x-app-layout>
     <div class="relative overflow-x-auto p-8">
         <div class="p-8 bg-white  shadow-xs rounded-xl">
-            <h1 class=" text-black text-3xl py-8 font-bold">Servicios</h1>
+            <h1 class=" text-black text-3xl py-8 font-bold">Servicios de TI</h1>
 
             <!-- boton de añadir -->
-            <a href="{{ route('responsible.create') }}">
+            <a href="{{ route('service.create') }}">
                 <button
                     class="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border mb-4 border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500">
                     <span
@@ -20,7 +20,7 @@
                         </svg>
                     </span>
                 </button>
-               
+
             </a>
             <div class="overflow-x-auto mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
@@ -28,14 +28,21 @@
                     <thead>
                         <tr>
                             <th scope="col">Nombre</th>
+                            <th scope="col">Horario de atencion</th>
+                            <th scope="col">Subproceso</th>
+                            <th scope="col">grupo encargado</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <!--Foreach-->
+                        @foreach ($servicios as $servicio)
                             <tr class="user-row">
 
-                                <td></td>
+                                <td>{{$servicio->name}}</td>
+                                <td>{{$servicio->atencion}}</td>
+                                <td>{{$servicio->subprocess ? $servicio->subprocess->name : 'N/A'}}</td>
+                                <td>{{$servicio->group ? $servicio->group->name : 'N/A'}}</td>
+                              
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
                                         <a href=""
@@ -52,8 +59,7 @@
                                         </a>
                                         <button
                                             class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
-                                            href="#" data-id=""
-                                            data-url="">
+                                            href="#" data-id="" data-url="">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                                                 <path stroke="currentColor" stroke-linecap="round"
@@ -66,7 +72,7 @@
                                     </div>
                                 </td>
                             </tr>
-                       
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -112,21 +118,6 @@
             });
         });
     </script>
-    @if (Session::has('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    title: 'Éxito',
-                    text: '{{ Session::get('success') }}',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            });
-        </script>
-    @endif
-   
+
+
 </x-app-layout>
-
-
-
-

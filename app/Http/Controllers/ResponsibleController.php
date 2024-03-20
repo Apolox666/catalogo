@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Responsible;
 
 
-class ResponsibleControler extends Controller
+class ResponsibleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class ResponsibleControler extends Controller
             ->where('state', 1)
             ->get();
 
-        return (view('responsables.index', compact('responsibles')));
+        return (view('modulos/responsables.index', compact('responsibles')));
     }
 
     /**
@@ -25,7 +25,7 @@ class ResponsibleControler extends Controller
      */
     public function create()
     {
-        return (view('responsables.create'));
+        return (view('modulos/responsables.create'));
     }
 
     /**
@@ -81,7 +81,7 @@ class ResponsibleControler extends Controller
     public function edit(string $id)
     {
         $responsible = Responsible::findOrFail($id);
-        return (view('responsables.edit', compact('responsible')));
+        return (view('modulos/responsables.edit', compact('responsible')));
     }
 
     /**
@@ -109,6 +109,7 @@ class ResponsibleControler extends Controller
             $responsible->name = $request->input('name');
             $responsible->state = 1;
             $responsible->save();
+            return redirect()->route('responsible.index');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
             

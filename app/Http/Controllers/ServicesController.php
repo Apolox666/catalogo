@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Service;
+use App\Models\Group;
+use App\Models\Subprocess;
 
 class ServicesController extends Controller
 {
@@ -11,8 +14,8 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        
-        return(view('servicios.index'));
+        $servicios = Service::all();
+        return(view('modulos/servicios.index' , compact('servicios')));
     }
 
     /**
@@ -20,7 +23,14 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        return(view('servicios.create'));
+        $subprocesos = Subprocess::select('id', 'name', 'state')
+        ->where('state',1)
+        ->get();
+
+        $grupos = Group::select('id', 'name', 'state')
+        ->where('state', 1)
+        ->get();
+        return(view('modulos/servicios.create', compact('grupos', 'subprocesos')));
     }
 
     /**
@@ -29,6 +39,17 @@ class ServicesController extends Controller
     public function store(Request $request)
     {
         
+        $hi= $request-> input('hora_inicio');
+        $hf =$request-> input('hora_fin');
+        $horario_atencion = $hi."-".$hf;
+        $servicios = new Service();
+        $servicios ->name = $request ->input('name');
+        $servicios ->atencion = $horario_atencion;
+        $servicios -> state = 1;
+        $servicios ->subprocesses_id= $request ->input('subprocess');
+        $servicios->groups_id = $request->input('groups');
+        $servicios ->save();
+        return redirect(route('service.index'));
     }
 
     /**

@@ -17,7 +17,7 @@ class ActivitiesController extends Controller
             }])
             ->get();
 
-        return view('actividades.index', compact('actividades'));
+        return view('modulos/actividades.index', compact('actividades'));
     }
 
 
@@ -27,7 +27,7 @@ class ActivitiesController extends Controller
         $grupos = Group::select('id', 'name', 'state')
             ->where('state', 1)
             ->get();
-        return (view('actividades.create', compact('grupos')));
+        return (view('modulos/actividades.create', compact('grupos')));
     }
 
 
@@ -81,7 +81,7 @@ class ActivitiesController extends Controller
         ->where('state', 1)
         ->get();
         $actividades = Activity::findOrFail($id);
-        return (view('actividades.edit', compact('actividades', 'grupos')));
+        return (view('modulos/actividades.edit', compact('actividades', 'grupos')));
     }
 
 

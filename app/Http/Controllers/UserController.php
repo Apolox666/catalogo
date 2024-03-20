@@ -26,12 +26,12 @@ class UserController extends Controller
 
 
 
-        return view('usuarios.index', ['success' => true], compact('usuarios'));
+        return view('modulos/usuarios.index', ['success' => true], compact('usuarios'));
     }
 
     public function create()
     {
-        return view('usuarios.create');
+        return view('modulos/usuarios.create');
     }
 
 
@@ -92,7 +92,7 @@ class UserController extends Controller
 
 
         $user = User::findOrFail($id);
-        return view('usuarios.edit', compact('user'));
+        return view('modulos/usuarios.edit', compact('user'));
     }
 
     /**
@@ -139,7 +139,7 @@ class UserController extends Controller
 
 
         // Redireccionar o realizar otras acciones después de la actualización
-        return redirect(route('user.index'));
+        
     }
 
     /**
