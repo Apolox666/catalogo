@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Activity;
+use App\Models\Service;
 use App\Models\Group;
+use App\Models\Subprocess;
 
 class ActivitiesController extends Controller
 {
@@ -70,16 +72,24 @@ class ActivitiesController extends Controller
 
 
     public function show(string $id)
-    {
-        //
-    }
+{
+    $activity = Activity::findOrFail($id);
+
+    $group = $activity->group;
+    $responsibles = $group->responsibles;
+    $service = $group->service;
+    $subprocess = $service->subprocess;
+
+    return view('modulos/actividades.show', compact('activity', 'group', 'responsibles', 'service', 'subprocess'));
+}
 
 
+    
     public function edit(string $id)
     {
         $grupos = Group::select('id', 'name', 'state')
-        ->where('state', 1)
-        ->get();
+            ->where('state', 1)
+            ->get();
         $actividades = Activity::findOrFail($id);
         return (view('modulos/actividades.edit', compact('actividades', 'grupos')));
     }
@@ -121,6 +131,21 @@ class ActivitiesController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
         }
+    }
+
+ 
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $activities = Activity::where('name', 'like', '%' . $query . '%')
+            ->where('state', 1)
+            ->with(['group' => function ($query) {
+                $query->where('state', 1);
+            }])
+            ->get();
+    
+        return response()->json($activities);
     }
 
     /**

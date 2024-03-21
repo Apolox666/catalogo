@@ -58,13 +58,23 @@
                     placeholder="Buscar...">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <i class="fas fa-search text-blue-600"></i>
+
                 </div>
             </div>
         </div>
     </section>
 
-
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Actividades</h1>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search-activity" placeholder="Escribe una actividad">
+                </div>
+                <div id="results"></div>
+            </div>
+        </div>
+    </div>
 
     <section class=" py-20 w-full h-full" id="que_es">
         <div class="text-center gap-10 flex mx-auto max-w-[1200px] w-[90%] overflow-hidden flex-col">
@@ -77,7 +87,8 @@
                     <div class="">
                         <h2 class="text-2xl font-bold mb-2 text-white">Un catalogo</h2>
                         <p class="text-gray-100 line-clamp-3">
-                            Consulta informacion relevante acerca de los servicios prestados por el area de tecnologia
+                            Consulta informacion relevante acerca de los servicios prestados por el area de
+                            tecnologia
                             dentro de SuperGiros.
                         </p>
                     </div>
@@ -105,7 +116,8 @@
                     <div class="">
                         <h2 class="text-2xl font-bold mb-2 text-white">Objetivo</h2>
                         <p class="text-white line-clamp-3">
-                            Presentar una herramienta web intuitiva para que la organizacion esté enterada de la gestion
+                            Presentar una herramienta web intuitiva para que la organizacion esté enterada de la
+                            gestion
                             tecnologica
                             realizada
                         </p>
@@ -123,7 +135,40 @@
             </span>
         </div>
     </footer>
-
+    <script>
+        $(document).ready(function() {
+            $("#search-activity").on("keyup", function() {
+                var query = $(this).val();
+                if (query.length >= 3) {
+                    $.ajax({
+                        url: "{{ route('activity.search') }}",
+                        method: "GET",
+                        data: {
+                            query: query,
+                        },
+                        success: function(response) {
+                            $("#results").empty();
+                            if (response.length > 0) {
+                                $.easch(response, function(index, activity) {
+                                    $("#results").append(
+                                        "<div class='list-group-item'>" +
+                                        "<a href='{{ route('activity.show', ':id') }}'>" +
+                                        activity.name +
+                                        "</a>" +
+                                        "</div>"
+                                    );
+                                });
+                            } else {
+                                $("#results").append(
+                                    "<div class='list-group-item'>No se encontraron actividades</div>"
+                                    );
+                            }
+                        },
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

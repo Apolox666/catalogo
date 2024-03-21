@@ -97,10 +97,10 @@
                 <div class="mb-4 pt-4">
                     <select name="priority" id="">
                         <option value="0">Seleccione una opcion</option>
-                        <option value="baja">Baja</option>
-                        <option value="media">Media</option>
-                        <option value="alta">Alta</option>
-                        <option value="critica">Critica</option>
+                        <option value="Minima">Minima</option>
+                        <option value="Media">Media</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Critica">Critica</option>
                     </select>
                     @error('name')
                         <p class="text-red-500 text-xs">{{ $message }}</p>

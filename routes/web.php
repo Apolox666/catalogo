@@ -29,6 +29,9 @@ Route::resource('servicios', App\Http\Controllers\ServicesController::class)->na
 Route::resource('productos', App\Http\Controllers\ProductController::class)->names('product');
 Route::resource('responsables', App\Http\Controllers\ResponsibleController::class)->names('responsible');
 Route::resource('subprocesos', App\Http\Controllers\SubprocessController::class)->names('subprocess');
+Route::get('/search-actividades', 'ActivitiesController@search')->name('activity.search');
+
+
 
 
 Route::middleware('auth')->group(function () {

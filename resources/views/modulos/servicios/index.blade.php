@@ -28,9 +28,9 @@
                     <thead>
                         <tr>
                             <th scope="col">Nombre</th>
+                            <th scope="col">grupo encargado</th>
                             <th scope="col">Horario de atencion</th>
                             <th scope="col">Subproceso</th>
-                            <th scope="col">grupo encargado</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -39,13 +39,14 @@
                             <tr class="user-row">
 
                                 <td>{{$servicio->name}}</td>
-                                <td>{{$servicio->atencion}}</td>
-                                <td>{{$servicio->subprocess ? $servicio->subprocess->name : 'N/A'}}</td>
                                 <td>{{$servicio->group ? $servicio->group->name : 'N/A'}}</td>
+                                <td>{{$servicio->schedule}}</td>
+                                <td>{{$servicio->subprocess ? $servicio->subprocess->name : 'N/A'}}</td>
+                                
                               
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
-                                        <a href=""
+                                        <a href="{{route('service.edit', $servicio->id)}}"
                                             class="px-4 p-2 bg-blue-500 flex gap-2 rounded-md hover:bg-blue-400">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -59,7 +60,7 @@
                                         </a>
                                         <button
                                             class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
-                                            href="#" data-id="" data-url="">
+                                            href="#" data-id="{{$servicio->id}}" data-url="">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                                                 <path stroke="currentColor" stroke-linecap="round"
@@ -93,7 +94,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: 'DELETE',
-                        url: "{{ route('responsible.destroy', ':id') }}".replace(':id', id),
+                        url: "{{ route('service.destroy', ':id') }}".replace(':id', id),
                         data: {
                             _token: '{{ csrf_token() }}'
                         },

@@ -14,7 +14,9 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $servicios = Service::all();
+        $servicios = Service::select('id', 'name', 'state', 'schedule', 'subprocesses_id', 'groups_id')
+        ->where('state',1)
+        ->get();
         return(view('modulos/servicios.index' , compact('servicios')));
     }
 
@@ -44,7 +46,7 @@ class ServicesController extends Controller
         $horario_atencion = $hi."-".$hf;
         $servicios = new Service();
         $servicios ->name = $request ->input('name');
-        $servicios ->atencion = $horario_atencion;
+        $servicios ->schedule = $horario_atencion;
         $servicios -> state = 1;
         $servicios ->subprocesses_id= $request ->input('subprocess');
         $servicios->groups_id = $request->input('groups');
@@ -81,6 +83,9 @@ class ServicesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $servicios = Service::findOrFail($id);
+        $servicios -> state = 0;
+        $servicios ->save();
+        return $resulta = "ok";
     }
 }
