@@ -24,7 +24,7 @@
             <div class="overflow-x-auto mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
                     <thead>
-                        <tr>
+                        <tr class="bg-blue-500 text-white">
                             <th scope="col">Nombre del Grupo</th>
                             <th scope="col">Responsables</th>
                             <th scope="col">Acciones</th>

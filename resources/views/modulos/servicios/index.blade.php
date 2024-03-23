@@ -26,10 +26,10 @@
                 <table class="table" id="Table">
 
                     <thead>
-                        <tr>
+                        <tr class="bg-blue-500 text-white">
                             <th scope="col">Nombre</th>
                             <th scope="col">grupo encargado</th>
-                            <th scope="col">Horario de atencion</th>
+                            <th scope="col">Atencion</th>
                             <th scope="col">Subproceso</th>
                             <th scope="col">Acciones</th>
                         </tr>
@@ -38,15 +38,29 @@
                         @foreach ($servicios as $servicio)
                             <tr class="user-row">
 
-                                <td>{{$servicio->name}}</td>
-                                <td>{{$servicio->group ? $servicio->group->name : 'N/A'}}</td>
-                                <td>{{$servicio->schedule}}</td>
-                                <td>{{$servicio->subprocess ? $servicio->subprocess->name : 'N/A'}}</td>
-                                
-                              
+                                <td>{{ $servicio->name }}</td>
+                                <td>
+                                    @if ($servicio->group && $servicio->group->state != 0)
+                                        {{ $servicio->group->name }}
+                                    @else
+                                        <!-- Aquí puedes mostrar un mensaje o dejar vacío el campo -->
+                                        <span class="text-red-500">Sin grupo asignado</span>
+                                    @endif
+                                </td>
+                                <td>{{ $servicio->schedule }}</td>
+                                <td>
+                                    @if ($servicio->subprocess && $servicio->subprocess->state != 0)
+                                        {{ $servicio->subprocess->name }}
+                                    @else
+                                        <!-- Aquí puedes mostrar un mensaje o dejar vacío el campo -->
+                                        <span class="text-red-500">Sin subproceso asignado</span>
+                                    @endif
+                                </td>
+
+
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
-                                        <a href="{{route('service.edit', $servicio->id)}}"
+                                        <a href="{{ route('service.edit', $servicio->id) }}"
                                             class="px-4 p-2 bg-blue-500 flex gap-2 rounded-md hover:bg-blue-400">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -60,7 +74,7 @@
                                         </a>
                                         <button
                                             class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
-                                            href="#" data-id="{{$servicio->id}}" data-url="">
+                                            href="#" data-id="{{ $servicio->id }}" data-url="">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                                                 <path stroke="currentColor" stroke-linecap="round"
@@ -72,6 +86,7 @@
 
                                     </div>
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>

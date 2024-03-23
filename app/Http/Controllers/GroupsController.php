@@ -45,14 +45,14 @@ class GroupsController extends Controller
         ];
         // Valida los datos del formulario
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:30', 'regex:/^[a-zA-Z\s]+$/'],
             'responsibles' => 'required|array',
         ], $messages);
 
         // Crea un nuevo grupo
         $group = Group::create([
             'name' => $request->name,
-        
+
         ]);
 
         // Asocia los responsables seleccionados con el grupo

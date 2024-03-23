@@ -29,7 +29,7 @@
                 <table class="table" id="Table">
 
                     <thead>
-                        <tr>
+                        <tr class="bg-blue-500 text-white">
                             <th scope="col">Nombre</th>
                             <th scope="col">Acciones</th>
                         </tr>

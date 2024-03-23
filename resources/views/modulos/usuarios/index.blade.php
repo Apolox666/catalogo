@@ -25,7 +25,7 @@
             <div class="overflow-hidden mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
                     <thead>
-                        <tr>
+                        <tr class="bg-blue-500 text-white">
                             <th scope="col">Nombre</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Fecha de creacion</th>

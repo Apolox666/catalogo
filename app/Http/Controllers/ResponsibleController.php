@@ -35,13 +35,18 @@ class ResponsibleController extends Controller
     {
         $messages = [
             'required' => 'Este campo es obligatorio.',
+            'max' => 'El texto escrito es demsaido largo',
+            'regex' => 'Este campo solo debe tener letras y espacios',
             'first_name.max' => 'El nombre introducido es muy largo',
             'first_name.regex' => 'El campo solo debe contener letras y espacios.',
+            
             // Añade más mensajes según tus necesidades
         ];
         $validator = $request->validate([
-            'first_name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
-
+            'first_name' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'first_surname' => ['required', 'string','max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'second_name' => ['max:20', 'regex:/^[a-zA-Z\s]+$/','nullable'],
+            'second_surname' => ['required', 'string','max:20', 'regex:/^[a-zA-Z\s]+$/'],
         ], $messages);
 
         $first_name = ucfirst($request->input('first_name'));

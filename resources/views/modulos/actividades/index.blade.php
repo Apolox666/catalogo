@@ -26,10 +26,10 @@
                 <table class="table" id="Table">
 
                     <thead>
-                        <tr>
+                        <tr class="bg-blue-500 text-white">
                             <th scope="col">Nombre</th>
                             <th scope="col">grupo encargado</th>
-                            <th scope="col">Tiempo de respuesta</th>
+                            <th scope="col">respuesta</th>
                             <th scope="col">Prioridad</th>
                             <th>Acciones</th>
                         </tr>
