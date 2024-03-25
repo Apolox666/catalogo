@@ -19,35 +19,7 @@
 </head>
 
 <body class="relative">
-    <header class="bg-gray-100 h-20 shadow-md fixed w-full z-50">
-        <nav class="flex mx-auto max-w-[1200px] w-[90%] overflow-hidden items-center h-full justify-between">
-            <a href="">
-                <img src="{{ asset('images/logoti.png') }}" alt="" width="190px">
-            </a>
-
-            <ul class="flex gap-8 font-bold text-lg">
-                <li>
-                    <a class="hover:text-blue-600 hidden md:flex" href="">Inicio</a>
-                </li>
-                <li>
-                    <a class="hover:text-blue-600 hidden md:flex" href="http://localhost/catalogo/public/#que_es">Que es
-                        MSU Assist</a>
-                </li>
-                @if (Route::has('login'))
-                    <li>
-                        @auth
-                            <a class="text-white py-2 px-6 bg-blue-600 rounded-full hover:bg-blue-400 shadow-lg"
-                                href="{{ route('dashboard') }}">Dashboard</a>
-                        </li>
-                    @else
-                        <a href="{{ route('login') }}"
-                            class="text-white py-2 px-6 bg-blue-600 rounded-full hover:bg-blue-400 shadow-lg"
-                            wire:navigate>Login</a>
-                    @endauth
-                @endif
-            </ul>
-        </nav>
-    </header>
+    @include('layouts.navbar')
 
     <section class="  py-20 md:py-0 w-full h-screen image relative z-0">
         <div class="flex flex-col text-center justify-center items-center  max-w-[1200px] w-[90%] mx-auto  h-full">
@@ -65,13 +37,16 @@
     </section>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Actividades</h1>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="search-activity" placeholder="Escribe una actividad">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Search Activities</div>
+
+                    <div class="card-body">
+                        <input type="text" id="search" class="form-control" placeholder="Search for activities">
+                        <div id="search-results"></div>
+                    </div>
                 </div>
-                <div id="results"></div>
             </div>
         </div>
     </div>
@@ -135,36 +110,28 @@
             </span>
         </div>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $("#search-activity").on("keyup", function() {
-                var query = $(this).val();
-                if (query.length >= 3) {
+            $('#search').on('input', function() {
+                var searchTerm = $(this).val();
+                if (searchTerm.length >= 3) {
                     $.ajax({
                         url: "{{ route('activity.search') }}",
-                        method: "GET",
-                        data: {
-                            query: query,
-                        },
+                        method: 'GET',
+                        data: {search: searchTerm},
                         success: function(response) {
-                            $("#results").empty();
-                            if (response.length > 0) {
-                                $.easch(response, function(index, activity) {
-                                    $("#results").append(
-                                        "<div class='list-group-item'>" +
-                                        "<a href='{{ route('activity.show', ':id') }}'>" +
-                                        activity.name +
-                                        "</a>" +
-                                        "</div>"
-                                    );
-                                });
-                            } else {
-                                $("#results").append(
-                                    "<div class='list-group-item'>No se encontraron actividades</div>"
-                                    );
-                            }
-                        },
+                            var activities = response.activities;
+                            var resultsHtml = '<ul>';
+                            activities.forEach(function(activity) {
+                                resultsHtml += '<li class="py-4"><a href="{{ route("activity.show", ":id") }}">'+ activity.name +'</a></li>';
+                            });
+                            resultsHtml += '</ul>';
+                            $('#search-results').html(resultsHtml);
+                        }
                     });
+                } else {
+                    $('#search-results').html('');
                 }
             });
         });

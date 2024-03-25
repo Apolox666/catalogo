@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActivitiesController;
 /* Las llamadas a los controladores User, product, services,  responsibles, no son necesarias si se llaman en el propio codigo*/
 
 
@@ -29,7 +30,8 @@ Route::resource('servicios', App\Http\Controllers\ServicesController::class)->na
 Route::resource('productos', App\Http\Controllers\ProductController::class)->names('product');
 Route::resource('responsables', App\Http\Controllers\ResponsibleController::class)->names('responsible');
 Route::resource('subprocesos', App\Http\Controllers\SubprocessController::class)->names('subprocess');
-Route::get('/search-actividades', 'ActivitiesController@search')->name('activity.search');
+Route::get('/search', [ActivitiesController::class, 'search'])->name('activity.search');
+Route::get('/activities/{id}', [ActivitiesController::class, 'show'])->name('activity.show');
 
 
 

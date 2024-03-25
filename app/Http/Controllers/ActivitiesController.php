@@ -44,7 +44,7 @@ class ActivitiesController extends Controller
 
 
         $request->validate([
-            'name' => ['required','string','max:30'],
+            'name' => ['required', 'string', 'max:30'],
             'groups' => 'required',
             'priority' => 'required',
             'time_type' => 'required',
@@ -70,21 +70,13 @@ class ActivitiesController extends Controller
         return redirect(route('activity.index'));
     }
 
-
-    public function show(string $id)
-{
-    $activity = Activity::findOrFail($id);
-
-    $group = $activity->group;
-    $responsibles = $group->responsibles;
-    $service = $group->service;
-    $subprocess = $service->subprocess;
-
-    return view('modulos/actividades.show', compact('activity', 'group', 'responsibles', 'service', 'subprocess'));
-}
-
-
     
+    public function show( string $id)
+    {
+        $activity = Activity::findOrFail($id);
+        return view('modulos/actividades.show', compact('activity'));
+    }
+
     public function edit(string $id)
     {
         $grupos = Group::select('id', 'name', 'state')
@@ -133,19 +125,17 @@ class ActivitiesController extends Controller
         }
     }
 
- 
+
 
     public function search(Request $request)
     {
-        $query = $request->input('query');
-        $activities = Activity::where('name', 'like', '%' . $query . '%')
+        $searchTerm = $request->input('search');
+        $activities = Activity::where('name', 'like', '%' . $searchTerm . '%')
             ->where('state', 1)
-            ->with(['group' => function ($query) {
-                $query->where('state', 1);
-            }])
+            ->with('group')
             ->get();
-    
-        return response()->json($activities);
+
+        return response()->json(['activities' => $activities]);
     }
 
     /**
