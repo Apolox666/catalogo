@@ -70,13 +70,26 @@ class ActivitiesController extends Controller
         return redirect(route('activity.index'));
     }
 
-    
-    public function show( string $id)
-    {
-        $activity = Activity::findOrFail($id);
-        return view('modulos/actividades.show', compact('activity'));
-    }
 
+    public function show($id)
+    {
+        $activity = Activity::where('id', $id)
+            ->with(['group' => function ($query) {
+                $query->where('state', 1)
+                    ->with(['responsibles' => function ($query) {
+                        $query->where('state', 1); // Filtrar responsables activos
+                    }])
+                    ->with(['services' => function ($query) {
+                        $query->where('state', 1)
+                            ->with(['subprocess' => function ($query) {
+                                $query->where('state', 1); // Filtrar subprocesos activos
+                            }]);
+                    }]);
+            }])
+            ->firstOrFail();
+
+        return view('modulos.actividades.show', compact('activity'));
+    }
     public function edit(string $id)
     {
         $grupos = Group::select('id', 'name', 'state')

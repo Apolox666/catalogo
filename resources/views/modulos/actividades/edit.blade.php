@@ -3,7 +3,7 @@
 
     <div class="relative overflow-x-auto p-8">
         <div class="p-4 bg-white rounded-lg shadow-xs">
-            <h1 class=" text-black text-3xl p-8 font-bold">Registrar una actividad</h1>
+            <h1 class=" text-black text-3xl p-8 font-bold">Editar actividad</h1>
             <form method="POST" class="p-6" action="{{ route('activity.update', $actividades->id) }}">
                 @csrf
                 @method('PATCH')

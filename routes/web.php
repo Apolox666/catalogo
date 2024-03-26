@@ -11,7 +11,7 @@ use App\Http\Controllers\ActivitiesController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 /* Esta ruta valida que el usuaro esté logueado para pasarlo al dashboard admin */
 Route::get('/dashboard', function () {

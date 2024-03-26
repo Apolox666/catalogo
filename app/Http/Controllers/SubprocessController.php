@@ -32,11 +32,16 @@ class SubprocessController extends Controller
     public function store(Request $request)
     {
     
-        $subproceso = new Subprocess();
-        $subproceso -> name = $request->input('name');
-        $subproceso -> state = 1;
-        $subproceso ->save();
-        return redirect()->route('subprocess.index');
+        try {
+            $subproceso = new Subprocess();
+            $subproceso -> name = $request->input('name');
+            $subproceso -> state = 1;
+            $subproceso ->save();
+            return redirect()->route('subprocess.index');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+       
     }
 
     /**
@@ -52,7 +57,8 @@ class SubprocessController extends Controller
      */
     public function edit(string $id)
     {
-        return view('modulos/subprocesos.edit');
+        $subproceso = Subprocess::findOrFail($id);
+        return view('modulos/subprocesos.edit', compact('subproceso'));
     }
 
     /**
@@ -60,7 +66,15 @@ class SubprocessController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $subproceso = Subprocess::findOrFail($id);
+            $subproceso -> name = $request->input('name');
+            $subproceso -> state = 1;
+            $subproceso ->save();
+            return redirect()->route('subprocess.index');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**

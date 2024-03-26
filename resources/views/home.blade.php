@@ -26,30 +26,18 @@
             <h2 class="font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-10 md:mb-20">Consulta una habilidad de
                 la MSU</h2>
             <div class="relative w-full">
-                <input type="text" class="w-full rounded-full pl-14 pr-4 py-2 focus:border-blue-700"
+                <input type="text" id="search" class="w-full rounded-full pl-14 pr-4 py-2 focus:border-blue-700"
                     placeholder="Buscar...">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <i class="fas fa-search text-blue-600"></i>
 
                 </div>
+                <div id="search-results"></div>
             </div>
         </div>
     </section>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Search Activities</div>
-
-                    <div class="card-body">
-                        <input type="text" id="search" class="form-control" placeholder="Search for activities">
-                        <div id="search-results"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
 
     <section class=" py-20 w-full h-full" id="que_es">
         <div class="text-center gap-10 flex mx-auto max-w-[1200px] w-[90%] overflow-hidden flex-col">
@@ -111,6 +99,7 @@
         </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
     <script>
         $(document).ready(function() {
             $('#search').on('input', function() {
@@ -124,7 +113,10 @@
                             var activities = response.activities;
                             var resultsHtml = '<ul>';
                             activities.forEach(function(activity) {
-                                resultsHtml += '<li class="py-4"><a href="{{ route("activity.show", ":id") }}">'+ activity.name +'</a></li>';
+                                // Genera la ruta con el ID de la actividad usando Blade
+                                var showRoute = "{{ route('activity.show', ':id') }}";
+                                showRoute = showRoute.replace(':id', activity.id);
+                                resultsHtml += '<li class="py-2 text-white font-bold hover:bg-blue-500 rounded-full hover:bg-opacity-50 "><a href="'+ showRoute +'">'+ activity.name +'</a></li>';
                             });
                             resultsHtml += '</ul>';
                             $('#search-results').html(resultsHtml);
@@ -136,6 +128,7 @@
             });
         });
     </script>
+    
 </body>
 
 </html>

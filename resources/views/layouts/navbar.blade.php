@@ -1,3 +1,4 @@
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 <header class="bg-gray-100 h-20 shadow-md fixed w-full z-50">
     <nav class="flex mx-auto max-w-[1200px] w-[90%] overflow-hidden items-center h-full justify-between">
         <a href="">
@@ -6,11 +7,10 @@
 
         <ul class="flex gap-8 font-bold text-lg">
             <li>
-                <a class="hover:text-blue-600 hidden md:flex" href="">Inicio</a>
+                <a class="hover:text-blue-600 hidden md:flex" href="{{route('home')}}">Inicio</a>
             </li>
             <li>
-                <a class="hover:text-blue-600 hidden md:flex" href="http://localhost/catalogo/public/#que_es">Que es
-                    MSU Assist</a>
+                <a class="hover:text-blue-600 hidden md:flex" href="http://localhost/catalogo/public/#que_es">Que es el catalogo TI</a>
             </li>
             @if (Route::has('login'))
                 <li>

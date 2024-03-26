@@ -31,4 +31,9 @@ class Group extends Model
     {
         return $this->hasMany(Activity::class, 'group_id');
     }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'groups_id', 'id');
+    }
 }

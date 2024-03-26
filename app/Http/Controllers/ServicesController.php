@@ -67,7 +67,16 @@ class ServicesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $subprocesos = Subprocess::select('id', 'name', 'state')
+        ->where('state',1)
+        ->get();
+
+        $grupos = Group::select('id', 'name', 'state')
+        ->where('state', 1)
+        ->get();
+        
+        $servicios = Service::findOrFail($id);
+        return(view('modulos/servicios.edit', compact('servicios', 'subprocesos', 'grupos')));
     }
 
     /**
