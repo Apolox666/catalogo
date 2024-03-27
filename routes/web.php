@@ -4,6 +4,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivitiesController;
+use Illuminate\Routing\Controllers\Middleware;
+
 /* Las llamadas a los controladores User, product, services,  responsibles, no son necesarias si se llaman en el propio codigo*/
 
 
@@ -23,13 +25,13 @@ Route::get('/dashboard', function () {
 
 /* Estas rutas son las llamadas de los controladores resources que facilitan los CRUD usados */
 /* El atribute names establece la manera en que voy a referenciar el controlador para acceder a sus metodos */
-Route::resource('usuarios', App\Http\Controllers\UserController::class)->names('user');
-Route::resource('actividades', App\Http\Controllers\ActivitiesController::class)->names('activity');
-Route::resource('grupos', App\Http\Controllers\GroupsController::class)->names('group');
-Route::resource('servicios', App\Http\Controllers\ServicesController::class)->names('service');
-Route::resource('productos', App\Http\Controllers\ProductController::class)->names('product');
-Route::resource('responsables', App\Http\Controllers\ResponsibleController::class)->names('responsible');
-Route::resource('subprocesos', App\Http\Controllers\SubprocessController::class)->names('subprocess');
+Route::resource('usuarios', App\Http\Controllers\UserController::class)->names('user')->middleware('auth');
+Route::resource('actividades', App\Http\Controllers\ActivitiesController::class)->names('activity')->middleware('auth');
+Route::resource('grupos', App\Http\Controllers\GroupsController::class)->names('group')->middleware('auth');
+Route::resource('servicios', App\Http\Controllers\ServicesController::class)->names('service')->middleware('auth');
+Route::resource('productos', App\Http\Controllers\ProductController::class)->names('product')->middleware('auth');
+Route::resource('responsables', App\Http\Controllers\ResponsibleController::class)->names('responsible')->middleware('auth');
+Route::resource('subprocesos', App\Http\Controllers\SubprocessController::class)->names('subprocess')->middleware('auth');
 Route::get('/search', [ActivitiesController::class, 'search'])->name('activity.search');
 Route::get('/activities/{id}', [ActivitiesController::class, 'show'])->name('activity.show');
 

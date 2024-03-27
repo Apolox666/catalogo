@@ -1,0 +1,6 @@
+.image {
+    background-image: url("{{ asset('images/hero4.jpg') }}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

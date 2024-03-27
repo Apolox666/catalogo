@@ -10,7 +10,7 @@
     <title>Home</title>
     <style>
         .image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{ asset('images/hero.jpg') }}");
+            background-image: url("{{ asset('images/hero4.jpg') }}");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -23,25 +23,30 @@
 
     <section class="  py-20 md:py-0 w-full h-screen image relative z-0">
         <div class="flex flex-col text-center justify-center items-center  max-w-[1200px] w-[90%] mx-auto  h-full">
-            <h2 class="font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-10 md:mb-20">Consulta una habilidad de
+            <h2 class="font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-10 md:mb-20">Consulta una actividad de
                 la MSU</h2>
             <div class="relative w-full">
-                <input type="text" id="search" class="w-full rounded-full pl-14 pr-4 py-2 focus:border-blue-700"
+                <div class="flex">
+                    <button class="py-2 px-4 bg-blue-700">
+                        <i class="fas fa-search text-white"></i>
+                    </button>
+                    <input type="text" id="search" class="w-full  pr-4 py-2 focus:border-blue-700"
                     placeholder="Buscar...">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <i class="fas fa-search text-blue-600"></i>
-
+                    
                 </div>
-                <div id="search-results"></div>
+                
+                
+                <div id="search-results" class="bg-white rounded-full"></div>
             </div>
+            
         </div>
     </section>
 
- 
+
 
     <section class=" py-20 w-full h-full" id="que_es">
         <div class="text-center gap-10 flex mx-auto max-w-[1200px] w-[90%] overflow-hidden flex-col">
-            <h2 class=" font-bold text-blue-700 text-3xl">¿Que es MSU Assist?</h2>
+            <h2 class=" font-bold text-blue-700 text-3xl">¿Que es el catalogo TI?</h2>
             <div class="flex flex-col sm:flex-row gap-6">
                 <div
                     class="group flex flex-col justify-start items-start gap-2 w-96 h-56 duration-500 relative rounded-lg p-4 bg-blue-700 hover:-translate-y-2 hover:shadow-xl shadow-gray-300">
@@ -49,33 +54,25 @@
 
                     <div class="">
                         <h2 class="text-2xl font-bold mb-2 text-white">Un catalogo</h2>
-                        <p class="text-gray-100 line-clamp-3">
+                        <p class=" flex text-gray-100  px-2 line-clamp-3">
                             Consulta informacion relevante acerca de los servicios prestados por el area de
                             tecnologia
                             dentro de SuperGiros.
                         </p>
                     </div>
-
                 </div>
-
                 <div
                     class="group flex flex-col justify-start items-start gap-2 w-96 h-56 duration-500 relative rounded-lg p-4 bg-blue-700 hover:-translate-y-2 hover:shadow-xl shadow-gray-300">
-
-
                     <div class="">
                         <h2 class="text-2xl font-bold mb-2 text-white">Una guia</h2>
-                        <p class="text-gray-100 line-clamp-3">
+                        <p class="flex text-gray-100 line-clamp-3">
                             El objetivo es guiar a las personas pertenecientes a supergiros en el proceso
                             de solicitar los servicios del area de tecnologia
                         </p>
                     </div>
-
                 </div>
-
                 <div
                     class="group flex flex-col justify-start items-start gap-2 w-96 h-56 duration-500 relative rounded-lg p-4 bg-blue-700 hover:-translate-y-2 hover:shadow-xl shadow-gray-300">
-
-
                     <div class="">
                         <h2 class="text-2xl font-bold mb-2 text-white">Objetivo</h2>
                         <p class="text-white line-clamp-3">
@@ -99,7 +96,7 @@
         </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   
+
     <script>
         $(document).ready(function() {
             $('#search').on('input', function() {
@@ -108,7 +105,9 @@
                     $.ajax({
                         url: "{{ route('activity.search') }}",
                         method: 'GET',
-                        data: {search: searchTerm},
+                        data: {
+                            search: searchTerm
+                        },
                         success: function(response) {
                             var activities = response.activities;
                             var resultsHtml = '<ul>';
@@ -116,7 +115,9 @@
                                 // Genera la ruta con el ID de la actividad usando Blade
                                 var showRoute = "{{ route('activity.show', ':id') }}";
                                 showRoute = showRoute.replace(':id', activity.id);
-                                resultsHtml += '<li class="py-2 text-white font-bold hover:bg-blue-500 rounded-full hover:bg-opacity-50 "><a href="'+ showRoute +'">'+ activity.name +'</a></li>';
+                                resultsHtml +=
+                                    '<li class="py-2 text-black bg-white"><a class="hover:text-blue-600" href="' +
+                                    showRoute + '">' + activity.name + '</a></li>';
                             });
                             resultsHtml += '</ul>';
                             $('#search-results').html(resultsHtml);
@@ -128,7 +129,7 @@
             });
         });
     </script>
-    
+
 </body>
 
 </html>

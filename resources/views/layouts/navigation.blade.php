@@ -1,6 +1,6 @@
 <aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
     <div class="py-4 text-gray-500">
-        <a class="flex px-6  py-4 text-lg font-bold items-center text-gray-800" href="{{ route('dashboard') }}">
+        <a class="flex px-6  py-4 text-lg font-bold items-center text-gray-800" href="{{ route('home') }}">
             <img src="{{ asset('images/logoti.png') }}" width="190px" alt="">
         </a>
 
