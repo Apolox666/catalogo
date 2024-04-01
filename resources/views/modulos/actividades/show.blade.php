@@ -7,7 +7,7 @@
         background-position: center;
     }
 </style>
-<div class="image flex items-center  h-full">
+<div class="image flex items-center pt-20  h-full">
     <div class="container  flex mx-auto max-w-3xl">
         <div class="bg-white  overflow-hidden  shadow rounded-lg border">
             <div class="px-4 py-5 sm:px-6 flex gap-20">

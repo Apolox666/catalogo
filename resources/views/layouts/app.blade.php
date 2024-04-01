@@ -30,14 +30,13 @@
         <div class="flex flex-col flex-1 w-full">
             @include('layouts.top-menu')
             <main class="h-full overflow-y-auto bg-gray-200">
+                @include('layouts.spinner')
                 {{ $slot }}
-               
             </main>
         </div>
-
     </div>
     </div>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src="{{asset('js/spinner.js')}}"></script>
 </body>
-
 </html>

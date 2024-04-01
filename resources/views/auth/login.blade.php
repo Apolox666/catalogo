@@ -7,7 +7,13 @@
         </div>
         <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div class="w-full">
-              <img src="{{asset('images/logoti.png')}}" width="180px">
+                <div>
+                    <a class="flex w-44" href="{{route('home')}}">
+                        <img src="{{asset('images/logoti.png')}}" width="180px">
+                    </a>
+                </div>
+                
+          
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf

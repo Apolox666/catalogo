@@ -36,7 +36,7 @@
                 </div>
                 
                 
-                <div id="search-results" class="bg-white rounded-full"></div>
+                <div id="search-results" class="bg-white rounded-full "></div>
             </div>
             
         </div>
@@ -116,7 +116,7 @@
                                 var showRoute = "{{ route('activity.show', ':id') }}";
                                 showRoute = showRoute.replace(':id', activity.id);
                                 resultsHtml +=
-                                    '<li class="py-2 text-black bg-white"><a class="hover:text-blue-600" href="' +
+                                    '<li class="py-2 text-black bg-white"><a class="hover:text-blue-600 hover:font-bold" href="' +
                                     showRoute + '">' + activity.name + '</a></li>';
                             });
                             resultsHtml += '</ul>';
