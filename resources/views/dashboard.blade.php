@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="p-4">
+    <div class="p-4  flex  justify-center items-center h-full">
         <div class=" max-w-7xl mx-auto shadow-lg">
             <div class="bg-white rounded-3xl p-8 mb-5">
                 <h1 class="text-3xl font-bold mb-10">Bienvenid@ {{ auth()->user()->name }} =)</h1>

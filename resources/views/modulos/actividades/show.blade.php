@@ -7,9 +7,9 @@
         background-position: center;
     }
 </style>
-<div class="image">
+<div class="image flex items-center  h-full">
     <div class="container  flex mx-auto max-w-3xl">
-        <div class="bg-white mb-10 mt-28 overflow-hidden  shadow rounded-lg border">
+        <div class="bg-white  overflow-hidden  shadow rounded-lg border">
             <div class="px-4 py-5 sm:px-6 flex gap-20">
                 <div>
                     <h3 class="text-2xl">
@@ -71,6 +71,16 @@
                     </div>
                     <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
+                            Horarios de atencion
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            @if ($activity->group->services->isNotEmpty())
+                                <p>Horario de Atención: {{ $activity->group->services->first()->schedule }}</p>
+                            @endif
+                        </dd>
+                    </div>
+                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
                             Grupo y servicios encargados:
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -87,27 +97,20 @@
                             @endforeach
                         </dd>
                     </div>
-                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Horarios de atencion
-                        </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            @if ($activity->group->services->isNotEmpty())
-                                <p>Horario de Atención: {{ $activity->group->services->first()->schedule }}</p>
-                            @endif
-                        </dd>
-                    </div>
+                   
                 </dl>
             </div>
         </div>
     
     </div>
-    <footer class="bg-blue-700  shadow w-full">
-        <div class="w-full mx-auto p-4 md:flex md:items-center md:justify-between">
-            <span class="text-sm text-white sm:text-cente">© 2024 <a href="https://flowbite.com/"
-                    class="hover:underline">Red empresarial de servicios S.A.S™</a>. All Rights Reserved.
-            </span>
-        </div>
-    </footer>
+   
 </div>
+<footer class="bg-blue-700  shadow w-full">
+    <div class="w-full mx-auto p-4 md:flex md:items-center md:justify-between">
+        <span class="text-sm text-white sm:text-cente">© 2024 <a href="https://flowbite.com/"
+                class="hover:underline">Red empresarial de servicios S.A.S™</a>. All Rights Reserved.
+        </span>
+    </div>
+</footer>
+
 
