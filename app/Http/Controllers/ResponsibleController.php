@@ -59,6 +59,7 @@ class ResponsibleController extends Controller
         // Construir el nombre completo
         $name = trim("$first_name $second_name $first_surname $second_surname");
  
+     
        
         try {
             // Guardar el responsable en la base de datos
