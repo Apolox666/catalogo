@@ -2,7 +2,10 @@
 
 
 
+
     <div class="relative overflow-x-auto p-8">
+
+
         <div class="p-8 bg-white  shadow-xs rounded-xl">
             <h1 class=" text-black text-3xl py-8 font-bold">Responsables</h1>
 
@@ -23,8 +26,9 @@
                         </svg>
                     </span>
                 </button>
-               
+
             </a>
+
             <div class="overflow-x-auto mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
 
@@ -74,8 +78,10 @@
                 </table>
             </div>
         </div>
+
+
     </div>
-  
+
     <script>
         $('.eliminar').click(function() {
             var id = $(this).data('id'); // Obtener el valor del atributo data-id
@@ -116,5 +122,23 @@
             });
         });
     </script>
-    
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+    </script>
+
 </x-app-layout>

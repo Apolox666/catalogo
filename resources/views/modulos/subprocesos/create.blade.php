@@ -15,6 +15,7 @@
                         name="name" :value="old('name')" autofocus autocomplete="name" />
 
                     @error('name')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <!-- acciones -->

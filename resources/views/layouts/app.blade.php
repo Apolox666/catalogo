@@ -31,6 +31,7 @@
             @include('layouts.top-menu')
             <main class="h-full overflow-y-auto bg-gray-200">
                 @include('layouts.spinner')
+                
                 {{ $slot }}
             </main>
         </div>

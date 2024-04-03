@@ -20,16 +20,20 @@
 
                 <x-input-label for="time" :value="__('Seleccione el tiempo de respuesta para esta actividad')" class="pt-8" />
                 <div class="mb-4 pt-4">
-                    <select name="time_type" id="time_type">
+                    <select name="time_type" id="time_type"
+                        class="{{ $errors->has('time_type') ? 'border-red-600' : '' }}">
                         <option value="">Seleccione una opcion</option>
                         <option value="hours">Horas</option>
                         <option value="days">Días</option>
                     </select>
                 </div>
+                @error('time_type')
+                    <p class="text-red-500 text-xs">{{ $message }}</p>
+                @enderror
 
                 <div id="time_hours" style="display:none;">
                     <x-input-label for="time_hours" :value="__('Seleccione la cantidad de horas')" class="pt-4" />
-                    <select name="time_hours">
+                    <select name="time_hours" class="{{ $errors->has('time_hours') ? 'border-red-600' : '' }}">
                         <option value="">Seleccione una opcion</option>
                         <option value="1 hora">1 hora</option>
                         <option value="2 horas">2 horas</option>
@@ -55,7 +59,7 @@
 
                 <div id="time_days" style="display:none;">
                     <x-input-label for="time_days" :value="__('Seleccione la cantidad de días')" class="pt-4" />
-                    <select name="time_days">
+                    <select name="time_days" class="{{ $errors->has('time_days') ? 'border-red-600' : '' }}">
                         <option value="">Seleccione una opcion</option>
                         <option value="1 dia">1 día</option>
                         <option value="2 días">2 días</option>
@@ -95,7 +99,7 @@
 
                 <x-input-label for="priority" :value="__('Seleccione el impacto o prioridad de esta actividad')" class="pt-8" />
                 <div class="mb-4 pt-4">
-                    <select name="priority" id="">
+                    <select name="priority" id="" class="{{ $errors->has('name') ? 'border-red-600' : '' }}">
                         <option value="0">Seleccione una opcion</option>
                         <option value="Minima">Minima</option>
                         <option value="Media">Media</option>

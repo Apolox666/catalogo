@@ -21,7 +21,7 @@
 
                 <x-input-label for="name" :value="__('Seleccione quienes pertenecerán a este grupo')" class="pt-8" />
                 <div class="mb-4">
-                    <input type="text" id="search" class="form-input rounded-md my-4 shadow-sm"
+                    <input type="text" id="search" class="form-input rounded-md my-4 shadow-sm "
                         placeholder="Buscar por nombre">
                 </div>
                 @error('responsibles')

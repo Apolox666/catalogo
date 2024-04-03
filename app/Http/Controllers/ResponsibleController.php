@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Responsible;
 
@@ -39,14 +41,14 @@ class ResponsibleController extends Controller
             'regex' => 'Este campo solo debe tener letras y espacios',
             'first_name.max' => 'El nombre introducido es muy largo',
             'first_name.regex' => 'El campo solo debe contener letras y espacios.',
-            
+
             // Añade más mensajes según tus necesidades
         ];
         $validator = $request->validate([
             'first_name' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
-            'first_surname' => ['required', 'string','max:20', 'regex:/^[a-zA-Z\s]+$/'],
-            'second_name' => ['max:20', 'regex:/^[a-zA-Z\s]+$/','nullable'],
-            'second_surname' => ['required', 'string','max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'first_surname' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'second_name' => ['max:20', 'regex:/^[a-zA-Z\s]+$/', 'nullable'],
+            'second_surname' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
         ], $messages);
 
         $first_name = ucfirst($request->input('first_name'));
@@ -56,19 +58,18 @@ class ResponsibleController extends Controller
 
         // Construir el nombre completo
         $name = trim("$first_name $second_name $first_surname $second_surname");
-
+ 
+       
         try {
             // Guardar el responsable en la base de datos
             $responsible = new Responsible();
             $responsible->name = $name;
             $responsible->state = 1;
             $responsible->save();
-
-            return redirect()->route('responsible.index');
+            return redirect()->route('responsible.index')->with('success', 'Responsable creado.');
         } catch (\Exception $e) {
-            // Manejar la excepción si ocurre algún error inesperado
-            return response()->json(['success' => '¡Usuario creado exitosamente!'], Response::HTTP_OK);
-          
+            return redirect()->route('responsible.index')->with('error', 'Error al crear responsable.');
+
         }
     }
 
@@ -114,15 +115,14 @@ class ResponsibleController extends Controller
             $responsible->name = $request->input('name');
             $responsible->state = 1;
             $responsible->save();
-            return redirect()->route('responsible.index');
+            return redirect()->route('responsible.index')->with('success', 'Responsable editado.');
         } catch (\Throwable $th) {
-            return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
-            
+            return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al editar el responsable.');
         }
 
 
         // Redireccionar o realizar otras acciones después de la actualización
-        return redirect(route('responsible.index'));
+
     }
 
     /**
@@ -138,7 +138,6 @@ class ResponsibleController extends Controller
             return response()->json(['message' => 'El responsable ha sido eliminado correctamente'], 200);
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el responsable.');
-           
         }
     }
 }

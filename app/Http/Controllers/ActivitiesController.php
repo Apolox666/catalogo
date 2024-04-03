@@ -55,19 +55,24 @@ class ActivitiesController extends Controller
 
 
         // Crea un nuevo grupo
-        $activity = new Activity();
-        $activity->name = $request->name;
-        $activity->groups_id = $request->groups; // Asigna el ID del grupo seleccionado
-        $activity->priority = $request->input('priority');
-        if ($request->input('time_type') == 'hours') {
-            $activity->time = $request->input('time_hours');
-        } elseif ($request->input('time_type') == 'days') {
-            $activity->time = $request->input('time_days');
+        try {
+            $activity = new Activity();
+            $activity->name = $request->name;
+            $activity->groups_id = $request->groups; // Asigna el ID del grupo seleccionado
+            $activity->priority = $request->input('priority');
+            if ($request->input('time_type') == 'hours') {
+                $activity->time = $request->input('time_hours');
+            } elseif ($request->input('time_type') == 'days') {
+                $activity->time = $request->input('time_days');
+            }
+            $activity->state = 1;
+            $activity->save();
+    
+            return redirect(route('activity.index'))->with('success', 'Actividad creada.');
+        } catch (\Throwable $th) {
+            return redirect(route('activity.index'))->with('success', 'Error al  crear actividad.');
         }
-        $activity->state = 1;
-        $activity->save();
-
-        return redirect(route('activity.index'));
+        
     }
 
 
@@ -107,6 +112,7 @@ class ActivitiesController extends Controller
             'name.max' => 'El nombre introducido es muy largo',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
             'not_in' => 'Por favor, seleccione una opción válida.',
+            'time_type.required' => "Seleccione una opcion",
         ];
 
 
@@ -120,6 +126,7 @@ class ActivitiesController extends Controller
         ], $messages);
 
         $activity = Activity::find($id);
+      
         try {
             $activity->name = $request->name;
             $activity->groups_id = $request->groups; // Asigna el ID del grupo seleccionado
@@ -130,11 +137,12 @@ class ActivitiesController extends Controller
                 $activity->time = $request->input('time_days');
             }
             $activity->state = 1;
+            
             $activity->save();
 
-            return redirect(route('activity.index'));
+            return redirect(route('activity.index'))->with('success', 'Actividad editada.');
         } catch (\Throwable $th) {
-            //throw $th;
+            return redirect(route('activity.index'))->with('error', 'Error al editar.');
         }
     }
 

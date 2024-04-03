@@ -116,6 +116,22 @@
             });
         });
     </script>
-
-
+<script>
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: '{{ session('success') }}',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    @endif
+    @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: '{{ session('error') }}',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    @endif
+</script>
 </x-app-layout>

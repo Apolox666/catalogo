@@ -50,16 +50,20 @@ class GroupsController extends Controller
         ], $messages);
 
         // Crea un nuevo grupo
-        $group = Group::create([
-            'name' => $request->name,
-
-        ]);
+        try {
+            $group = Group::create([
+                'name' => $request->name,
+    
+            ]);
+            $group->responsibles()->attach($request->responsibles);
+            return redirect()->route('group.index')->with('success','Grupo creado');
+        } catch (\Throwable $th) {
+            return redirect()->route('group.index')->with('error','Error al crear grupo');
+        }
+       
 
         // Asocia los responsables seleccionados con el grupo
-        $group->responsibles()->attach($request->responsibles);
-
-        // Redirecciona a la página de inicio o donde sea adecuado
-        return redirect()->route('group.index');
+      
     }
 
     /**
@@ -101,14 +105,19 @@ class GroupsController extends Controller
         ], $messages);
 
         // Actualiza los datos del grupo
-        $group->update([
-            'name' => $request->name,
-        ]);
-
-        // Actualiza las relaciones con los responsables
-        $group->responsibles()->sync($request->responsibles);
-
-        return redirect(route('group.index'));
+        try {
+            $group->update([
+                'name' => $request->name,
+            ]);
+    
+            // Actualiza las relaciones con los responsables
+            $group->responsibles()->sync($request->responsibles);
+    
+            return redirect(route('group.index'))->with('success','Grupo editado');
+        } catch (\Throwable $th) {
+            return redirect(route('group.index'))->with('error','Error al editar grupo');
+        }
+       
     }
 
     /**

@@ -31,15 +31,28 @@ class SubprocessController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => 'Este campo es obligatorio.',
+            'name.max' => 'El nombre introducido es muy largo',
+            'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+           
+            // Añade más mensajes según tus necesidades
+        ];
+        // Valida los datos del formulario
+        $request->validate([
+            'name' => ['required', 'string', 'max:30', 'regex:/^[a-zA-Z\s]+$/'],
+           
+        ], $messages);
+
     
         try {
             $subproceso = new Subprocess();
             $subproceso -> name = $request->input('name');
             $subproceso -> state = 1;
             $subproceso ->save();
-            return redirect()->route('subprocess.index');
+            return redirect()->route('subprocess.index')->with('success', 'Subproceso creado');
         } catch (\Throwable $th) {
-            //throw $th;
+            return redirect()->route('subprocess.index')->with('error', 'Error al crear subproceso');
         }
        
     }
@@ -66,14 +79,27 @@ class SubprocessController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $messages = [
+            'required' => 'Este campo es obligatorio.',
+            'name.max' => 'El nombre introducido es muy largo',
+            'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+           
+            // Añade más mensajes según tus necesidades
+        ];
+        // Valida los datos del formulario
+        $request->validate([
+            'name' => ['required', 'string', 'max:30', 'regex:/^[a-zA-Z\s]+$/'],
+           
+        ], $messages);
+        
         try {
             $subproceso = Subprocess::findOrFail($id);
             $subproceso -> name = $request->input('name');
             $subproceso -> state = 1;
             $subproceso ->save();
-            return redirect()->route('subprocess.index');
+            return redirect()->route('subprocess.index')->with('success', 'Subproceso editado');
         } catch (\Throwable $th) {
-            //throw $th;
+            return redirect()->route('subprocess.index')->with('error', 'error al editar subproceso');
         }
     }
 

@@ -13,9 +13,10 @@
                     <x-input-label for="name" :value="__('Nombre del subproceso *')" />
                     <x-text-input id="name"
                         class="block mt-6 w-full {{ $errors->has('name') ? 'border-red-600' : '' }}" type="text"
-                        name="name" value="{{$subproceso->name}}" autofocus autocomplete="name" />
+                        name="name" value="{{ $subproceso->name }}" autofocus autocomplete="name" />
 
                     @error('name')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>
                 <!-- acciones -->
