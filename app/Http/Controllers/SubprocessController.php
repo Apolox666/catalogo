@@ -35,12 +35,13 @@ class SubprocessController extends Controller
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+            'name.min' => 'El nombre instroducido es muy corto',
            
             // Añade más mensajes según tus necesidades
         ];
         // Valida los datos del formulario
         $request->validate([
-            'name' => ['required', 'string', 'max:30', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'string', 'max:30','min:4', 'regex:/^[a-zA-Z\s]+$/'],
            
         ], $messages);
 
@@ -83,12 +84,13 @@ class SubprocessController extends Controller
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+            'name.min' => 'El nombre instroducido es muy corto',
            
             // Añade más mensajes según tus necesidades
         ];
         // Valida los datos del formulario
         $request->validate([
-            'name' => ['required', 'string', 'max:30', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'string', 'max:30', 'min:4', 'regex:/^[a-zA-Z\s]+$/'],
            
         ], $messages);
         

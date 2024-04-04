@@ -38,13 +38,14 @@ class ActivitiesController extends Controller
         $messages = [
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
+            'min' => 'El nombre instroducido es muy corto',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
             'not_in' => 'Por favor, seleccione una opción válida.',
         ];
 
 
         $request->validate([
-            'name' => ['required', 'string', 'max:30'],
+            'name' => ['required', 'string', 'min:4', 'max:30'],
             'groups' => 'required',
             'priority' => 'required',
             'time_type' => 'required',
@@ -110,6 +111,7 @@ class ActivitiesController extends Controller
         $messages = [
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
+            'min' => 'El nombre instroducido es muy corto',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
             'not_in' => 'Por favor, seleccione una opción válida.',
             'time_type.required' => "Seleccione una opcion",
@@ -117,7 +119,7 @@ class ActivitiesController extends Controller
 
 
         $request->validate([
-            'name' => 'required|string|max:355',
+            'name' => 'required|string|max:355|min:4',
             'groups' => 'required',
             'priority' => 'required',
             'time_type' => 'required',

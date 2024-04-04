@@ -9,7 +9,7 @@
 
                 <!-- Name -->
                 <div>
-                    <x-input-label for="name" :value="__('Nombre del grupo')" />
+                    <x-input-label for="name" :value="__('Nombre del grupo *')" />
                     <x-text-input id="name"
                         class="block mt-6 w-full {{ $errors->has('name') ? 'border-red-600' : '' }}" type="text"
                         name="name" value="{{ $group->name }}" autofocus autocomplete="name" />
@@ -19,7 +19,7 @@
                     @enderror
                 </div>
 
-                <x-input-label for="name" :value="__('Seleccione quienes pertenecerán a este grupo')" class="pt-8" />
+                <x-input-label for="name" :value="__('Seleccione quienes pertenecerán a este grupo *')" class="pt-8" />
                 <div class="mb-4">
                     <input type="text" id="search" class="form-input rounded-md my-4 shadow-sm "
                         placeholder="Buscar por nombre">

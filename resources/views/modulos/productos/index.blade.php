@@ -4,7 +4,7 @@
             <h1 class=" text-black text-3xl py-8 font-bold">Productos</h1>
 
             <!-- boton de añadir -->
-            <a href="{{ route('responsible.create') }}">
+            <a href="{{ route('product.create') }}">
                 <button
                     class="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border mb-4 border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500">
                     <span
@@ -33,9 +33,12 @@
                     </thead>
                     <tbody>
                     <!--Foreach-->
+                    @foreach ($productos as $producto)
+                        
+                    
                             <tr class="user-row">
 
-                                <td></td>
+                                <td>{{$producto->name}}</td>
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
                                         <a href=""
@@ -66,7 +69,7 @@
                                     </div>
                                 </td>
                             </tr>
-                       
+                            @endforeach
                     </tbody>
                 </table>
             </div>
@@ -112,18 +115,24 @@
             });
         });
     </script>
-    @if (Session::has('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    title: 'Éxito',
-                    text: '{{ Session::get('success') }}',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
+     <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1500
             });
-        </script>
-    @endif
+        @endif
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+    </script>
    
 </x-app-layout>
 

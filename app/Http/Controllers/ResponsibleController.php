@@ -41,14 +41,15 @@ class ResponsibleController extends Controller
             'regex' => 'Este campo solo debe tener letras y espacios',
             'first_name.max' => 'El nombre introducido es muy largo',
             'first_name.regex' => 'El campo solo debe contener letras y espacios.',
+            'min' => 'El nombre instroducido es muy corto',
 
             // Añade más mensajes según tus necesidades
         ];
         $validator = $request->validate([
-            'first_name' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
-            'first_surname' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
-            'second_name' => ['max:20', 'regex:/^[a-zA-Z\s]+$/', 'nullable'],
-            'second_surname' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'first_name' => ['required', 'string', 'min:4', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'first_surname' => ['required', 'string', 'min:4', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'second_name' => ['max:20',  'min:4', 'regex:/^[a-zA-Z\s]+$/', 'nullable'],
+            'second_surname' => ['required', 'string',  'min:4', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
         ], $messages);
 
         $first_name = ucfirst($request->input('first_name'));
@@ -101,12 +102,13 @@ class ResponsibleController extends Controller
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+            'min' => 'El nombre instroducido es muy corto',
         ];
 
         $responsible = Responsible::find($id);
 
         $validator = $request->validate([
-            'name' => ['required', 'string', 'max:28', 'regex:/^[a-zA-ZñÑ\s]+$/'],
+            'name' => ['required', 'string', 'min:4', 'max:28', 'regex:/^[a-zA-ZñÑ\s]+$/'],
         ], $messages);
 
         // Verificar la unicidad del correo electrónico excluyendo el usuario actual

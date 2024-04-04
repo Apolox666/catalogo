@@ -12,7 +12,7 @@
 
                 <!-- Name -->
                 <div>
-                    <x-input-label for="name" :value="__('Nombre')" />
+                    <x-input-label for="name" :value="__('Nombre *')" />
                     <x-text-input id="name"
                         class="block mt-1 w-full {{ $errors->has('name') ? 'border-red-600' : '' }} " type="text"
                         name="name" value="{{ $user->name }}" autofocus autocomplete="name" />
@@ -21,7 +21,7 @@
 
                 <!-- Email Address -->
                 <div class="mt-12">
-                    <x-input-label for="email" :value="__('Correo')" />
+                    <x-input-label for="email" :value="__('Correo *')" />
                     <x-text-input id="email"
                         class="block mt-1 w-full {{ $errors->has('email') ? 'border-red-600' : '' }}" type="text"
                         name="email" value="{{ $user->email }}" autocomplete="username" readonly />
@@ -31,7 +31,7 @@
                 <!-- Password -->
 
                 <div class="mt-12">
-                    <x-input-label for="password" :value="__('Contraseña')" />
+                    <x-input-label for="password" :value="__('Contraseña *')" />
 
                     <x-text-input id="password"
                         class="block mt-1 w-full {{ $errors->has('password') ? 'border-red-600' : '' }}" type="password"
@@ -42,7 +42,7 @@
 
                 <!-- Confirm Password -->
                 <div class="mt-12">
-                    <x-input-label for="password_confirmation" :value="__('Confirmar contraseña')" />
+                    <x-input-label for="password_confirmation" :value="__('Confirmar contraseña *')" />
 
                     <x-text-input id="password_confirmation"
                         class="block mt-1 w-full {{ $errors->has('password') ? 'border-red-600' : '' }}" type="password"

@@ -39,13 +39,14 @@ class GroupsController extends Controller
         $messages = [
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
+            'min' => 'El nombre instroducido es muy corto',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
             'responsible.required'  => 'El necesario seleccionar minimo un responsable para el grupo.',
             // Añade más mensajes según tus necesidades
         ];
         // Valida los datos del formulario
         $request->validate([
-            'name' => ['required', 'string', 'max:30', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'string', 'max:30', 'min:4', 'regex:/^[a-zA-Z\s]+$/'],
             'responsibles' => 'required|array',
         ], $messages);
 
@@ -96,11 +97,12 @@ class GroupsController extends Controller
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
             'name.regex' => 'El campo  solo debe contener letras y espacios.',
+            'min' => 'El nombre instroducido es muy corto',
         ];
 
         // Valida los datos del formulario
         $request->validate([
-            'name' => 'required|string|max:255|regex:/^[a-zA-ZñÑ\s]+$/',
+            'name' => 'required|string|max:255|min:4|regex:/^[a-zA-ZñÑ\s]+$/',
             'responsibles' => 'array', // Asegura que al menos un responsable sea seleccionado
         ], $messages);
 

@@ -48,17 +48,19 @@ class UserController extends Controller
         $messages = [
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
+            'min' => 'El nombre instroducido es muy corto',
+            'password.min' => 'La contraseña debe tener minimo 8 caracteres',
             'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
             'email.email' => 'Ingrese una dirección de correo electrónico válida.',
             'email.unique' => 'Este correo electrónico ya está tomado.',
             'password.confirmed' => 'Las contraseñas no coinciden.',
-            // Añade más mensajes según tus necesidades
+            
         ];
 
         $validator = $request->validate([
-            'name' => ['required', 'string', 'max:28', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'string', 'max:28', 'min:4', 'regex:/^[a-zA-Z\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required','min:8', 'confirmed', Rules\Password::defaults()],
             'password_confirmation' => ['required']
         ], $messages);
 

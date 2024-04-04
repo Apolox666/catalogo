@@ -47,11 +47,11 @@ class ServicesController extends Controller
             'regex' => 'Este campo solo debe tener letras y espacios',
             'name.max' => 'El nombre introducido es muy largo',
             'name.regex' => 'El campo solo debe contener letras y espacios.',
-
+            'name.min' => 'El nombre instroducido es muy corto',
             // Añade más mensajes según tus necesidades
         ];
         $validator = $request->validate([
-            'name' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'min:4', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
             'hora_inicio' => ['required'],
             'hora_fin' => ['required'],
             'subprocess' => ['required'],
@@ -112,11 +112,11 @@ class ServicesController extends Controller
             'regex' => 'Este campo solo debe tener letras y espacios',
             'name.max' => 'El nombre introducido es muy largo',
             'name.regex' => 'El campo solo debe contener letras y espacios.',
-
+            'name.min' => 'El nombre instroducido es muy corto',
             // Añade más mensajes según tus necesidades
         ];
         $validator = $request->validate([
-            'name' => ['required', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'string', 'min:20', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
             'hora_inicio' => ['required'],
             'hora_fin' => ['required'],
             'subprocess' => ['required'],

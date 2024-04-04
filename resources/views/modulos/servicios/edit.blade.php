@@ -70,7 +70,7 @@
 
 
 
-                <x-input-label for="groups" :value="__('Seleccione el grupo al que pertenecerá esta actividad')" class="pt-8" />
+                <x-input-label for="groups" :value="__('Seleccione el grupo encargado del servicio')" class="pt-8" />
                 <div class="flex flex-wrap  my-4 gap-8" id="groups-container">
                     @foreach ($grupos as $grupo)
                         <div class="w-1/4 flex items-center my-4 gap-4 group">

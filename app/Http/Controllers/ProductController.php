@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -11,7 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return(view('modulos/productos.index'));
+        $productos = Product::all();
+        return(view('modulos/productos.index', compact('productos')));
     }
 
     /**
@@ -19,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('modulos/productos.create');
     }
 
     /**
@@ -27,7 +29,29 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $messages = [
+            'required' => 'Este campo es obligatorio.',
+            'name.max' => 'El nombre introducido es muy largo',
+            'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+            'min' => 'El nombre instroducido es muy corto',
+            // Añade más mensajes según tus necesidades
+        ];
+        // Valida los datos del formulario
+        $request->validate([
+            'name' => ['required', 'string', 'max:30', 'min:4', 'regex:/^[a-zA-Z\s]+$/'],
+           
+        ], $messages);
+
+        try {
+            $producto = new Product();
+            $producto -> name = $request->input('name');
+            $producto -> state  = 1;
+            $producto ->save();
+            return redirect(route('product.index'))->with('success', 'Producto creado');
+        } catch (\Throwable $th) {
+            return redirect(route('product.index'))->with('error', 'error al crear producto');
+        }
     }
 
     /**
@@ -43,7 +67,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('modulos/productos.edit');
     }
 
     /**

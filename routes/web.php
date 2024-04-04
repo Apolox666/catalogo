@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivitiesController;
 use Illuminate\Routing\Controllers\Middleware;
 
-/* Las llamadas a los controladores User, product, services,  responsibles, no son necesarias si se llaman en el propio codigo*/
 
 
 /* Esta ruta establece la pantalla que verá el usuario cuando entre a mi pagina*/
@@ -23,7 +22,7 @@ Route::get('/dashboard', function () {
     return view('dashboard', ['groups'=>$groups, 'responsible'=>$responsible, 'activity'=>$activity]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-/* Estas rutas son las llamadas de los controladores resources que facilitan los CRUD usados */
+
 /* El atribute names establece la manera en que voy a referenciar el controlador para acceder a sus metodos */
 Route::resource('usuarios', App\Http\Controllers\UserController::class)->names('user')->middleware('auth');
 Route::resource('actividades', App\Http\Controllers\ActivitiesController::class)->names('activity')->middleware('auth');
