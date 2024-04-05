@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Activity;
 use App\Models\Service;
 use App\Models\Group;
+use App\Models\Product;
 use App\Models\Subprocess;
 
 class ActivitiesController extends Controller
@@ -68,12 +69,11 @@ class ActivitiesController extends Controller
             }
             $activity->state = 1;
             $activity->save();
-    
+
             return redirect(route('activity.index'))->with('success', 'Actividad creada.');
         } catch (\Throwable $th) {
             return redirect(route('activity.index'))->with('success', 'Error al  crear actividad.');
         }
-        
     }
 
 
@@ -128,7 +128,7 @@ class ActivitiesController extends Controller
         ], $messages);
 
         $activity = Activity::find($id);
-      
+
         try {
             $activity->name = $request->name;
             $activity->groups_id = $request->groups; // Asigna el ID del grupo seleccionado
@@ -139,7 +139,7 @@ class ActivitiesController extends Controller
                 $activity->time = $request->input('time_days');
             }
             $activity->state = 1;
-            
+
             $activity->save();
 
             return redirect(route('activity.index'))->with('success', 'Actividad editada.');
@@ -153,14 +153,34 @@ class ActivitiesController extends Controller
     public function search(Request $request)
     {
         $searchTerm = $request->input('search');
-        $activities = Activity::where('name', 'like', '%' . $searchTerm . '%')
-            ->where('state', 1)
-            ->with('group')
-            ->get();
+        $productId = $request->input('product_id'); // Obtener el ID del producto seleccionado
 
+        echo $productId;
+        // Iniciar la consulta de actividades
+        $query = Activity::query();
+
+        // Aplicar filtro por término de búsqueda si se proporciona
+        if (!empty($searchTerm)) {
+            $query->where('name', 'like', '%' . $searchTerm . '%');
+        }
+
+        // Aplicar filtro por ID de producto si se selecciona un producto
+        if (!empty($productId)) {
+            // Filtrar por el grupo asociado al producto seleccionado
+            $query->whereHas('group', function ($q) use ($productId) {
+                $q->where('product_id', $productId)->where('state', 1); // Filtrar por producto activo
+            });
+        }
+
+        // Aplicar filtro para obtener solo actividades con estado 1
+        $query->where('state', 1);
+
+        // Obtener las actividades filtradas
+        $activities = $query->get();
+
+        // Devolver las actividades como JSON para la respuesta AJAX
         return response()->json(['activities' => $activities]);
     }
-
     /**
      * Remove the specified resource from storage.
      */

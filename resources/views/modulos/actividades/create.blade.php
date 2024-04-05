@@ -53,7 +53,7 @@
                         <option value="16 horas">16 horas</option>
                     </select>
                 </div>
-                @error('name')
+                @error('time_hours')
                     <p class="text-red-500 text-xs">{{ $message }}</p>
                 @enderror
 
@@ -93,20 +93,20 @@
                         <option value="30 días">30 días</option>
                     </select>
                 </div>
-                @error('name')
+                @error('time_days')
                     <p class="text-red-500 text-xs">{{ $message }}</p>
                 @enderror
 
                 <x-input-label for="priority" :value="__('Seleccione el impacto o prioridad de esta actividad *')" class="pt-8" />
                 <div class="mb-4 pt-4">
-                    <select name="priority" id="" class="{{ $errors->has('name') ? 'border-red-600' : '' }}">
+                    <select name="priority" id="" class="{{ $errors->has('priority') ? 'border-red-600' : '' }}">
                         <option value="0">Seleccione una opcion</option>
                         <option value="Minima">Minima</option>
                         <option value="Media">Media</option>
                         <option value="Alta">Alta</option>
                         <option value="Critica">Critica</option>
                     </select>
-                    @error('name')
+                    @error('priority')
                         <p class="text-red-500 text-xs">{{ $message }}</p>
                     @enderror
                 </div>

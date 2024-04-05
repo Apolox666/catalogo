@@ -5,13 +5,17 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivitiesController;
 use Illuminate\Routing\Controllers\Middleware;
+use App\Models\Product;
 
 
 
 /* Esta ruta establece la pantalla que verá el usuario cuando entre a mi pagina*/
 
 Route::get('/', function () {
-    return view('home');
+    $products = Product::all(); // Obtener todos los productos desde la base de datos
+
+    // Pasar la variable $products a la vista 'home'
+    return view('home', ['products' => $products]);
 })->name('home');
 
 /* Esta ruta valida que el usuaro esté logueado para pasarlo al dashboard admin */

@@ -28,6 +28,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Nombre</th>
+                            <th scope="col">Grupo asociado</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -39,6 +40,14 @@
                             <tr class="user-row">
 
                                 <td>{{$producto->name}}</td>
+                                <td>
+                                    @if ($producto->group && $producto->group->state != 0)
+                                        {{ $producto->group->name }}
+                                    @else
+                                        <!-- Aquí puedes mostrar un mensaje o dejar vacío el campo -->
+                                        <span class="text-red-500">Sin grupo asignado</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
                                         <a href=""
