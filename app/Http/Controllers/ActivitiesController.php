@@ -154,33 +154,43 @@ class ActivitiesController extends Controller
     {
         $searchTerm = $request->input('search');
         $productId = $request->input('product_id'); // Obtener el ID del producto seleccionado
-
-        echo $productId;
+    
         // Iniciar la consulta de actividades
         $query = Activity::query();
-
+    
         // Aplicar filtro por término de búsqueda si se proporciona
         if (!empty($searchTerm)) {
+            
             $query->where('name', 'like', '%' . $searchTerm . '%');
         }
+    
+        
 
         // Aplicar filtro por ID de producto si se selecciona un producto
         if (!empty($productId)) {
-            // Filtrar por el grupo asociado al producto seleccionado
-            $query->whereHas('group', function ($q) use ($productId) {
-                $q->where('product_id', $productId)->where('state', 1); // Filtrar por producto activo
+            // Obtener los IDs de los grupos asociados al producto seleccionado
+            
+            $groupIds = Product::find($productId)->groups()->pluck('id')->toArray();
+    
+            // Filtrar por los grupos asociados al producto
+            $query->whereHas('group', function ($q) use ($groupIds) {
+                $q->whereIn('id', $groupIds)->where('state', 1);
             });
         }
-
+    
         // Aplicar filtro para obtener solo actividades con estado 1
         $query->where('state', 1);
-
+    
         // Obtener las actividades filtradas
         $activities = $query->get();
-
+    
         // Devolver las actividades como JSON para la respuesta AJAX
         return response()->json(['activities' => $activities]);
     }
+
+
+
+
     /**
      * Remove the specified resource from storage.
      */

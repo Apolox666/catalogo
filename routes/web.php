@@ -23,7 +23,8 @@ Route::get('/dashboard', function () {
     $groups = App\Models\Group::where('state',1)->count();
     $responsible = App\Models\Responsible::where('state',1)->count();
     $activity = App\Models\Activity::where('state',1)->count();
-    return view('dashboard', ['groups'=>$groups, 'responsible'=>$responsible, 'activity'=>$activity]);
+    $service = App\Models\Service::where('state',1)->count();
+    return view('dashboard', ['groups'=>$groups, 'responsible'=>$responsible, 'activity'=>$activity, 'service'=>$service]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 

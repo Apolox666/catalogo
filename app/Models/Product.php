@@ -9,7 +9,9 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function group()
+    
+
+    public function groups()
     {
         return $this->belongsTo(Group::class, 'groups_id');
     }

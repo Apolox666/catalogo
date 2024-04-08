@@ -51,7 +51,7 @@ class ServicesController extends Controller
             // Añade más mensajes según tus necesidades
         ];
         $validator = $request->validate([
-            'name' => ['required', 'min:4', 'string', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'min:4', 'string', 'max:40', 'regex:/^[a-zA-Z\s]+$/'],
             'hora_inicio' => ['required'],
             'hora_fin' => ['required'],
             'subprocess' => ['required'],
@@ -116,7 +116,7 @@ class ServicesController extends Controller
             // Añade más mensajes según tus necesidades
         ];
         $validator = $request->validate([
-            'name' => ['required', 'string', 'min:20', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'string', 'min:20', 'max:40', 'regex:/^[a-zA-Z\s]+$/'],
             'hora_inicio' => ['required'],
             'hora_fin' => ['required'],
             'subprocess' => ['required'],
@@ -135,9 +135,9 @@ class ServicesController extends Controller
             $servicios->subprocesses_id = $request->input('subprocess');
             $servicios->groups_id = $request->input('groups');
             $servicios->save();
-            return redirect(route('service.index'))->with('success', 'Servicio creado');
+            return redirect(route('service.index'))->with('success', 'Servicio editado');
         } catch (\Throwable $th) {
-            return redirect(route('service.index'))->with('error', 'Error al crear servicio');
+            return redirect(route('service.index'))->with('error', 'Error al editar servicio');
         }
     }
 

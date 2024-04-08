@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="p-4  flex  justify-center items-center h-full">
-        <div class=" max-w-7xl mx-auto shadow-lg">
-            <div class="bg-white rounded-3xl p-8 mb-5">
+        <div class=" max-w-7xl mx-auto w-full shadow-lg">
+            <div class="bg-white l rounded-3xl p-8 mb-5">
                 <h1 class="text-3xl font-bold mb-10">Bienvenid@ {{ auth()->user()->name }} =)</h1>
                 <hr class="my-10">
 
@@ -22,17 +22,17 @@
                                 </div>
                             </div>
                             <div class="p-4 bg-yellow-300 rounded-xl text-gray-800">
-                                <div class="font-bold text-2xl leading-none">20</div>
+                                <div class="font-bold text-2xl leading-none">{{ $service}}</div>
                                 <div class="mt-2">Servicios activos</div>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="p-4 bg-blue-500 font-bold rounded-xl text-white">
                                     <div class="font-bold text-2xl leading-none">{{ $groups }}</div>
-                                    <div class="mt-2"></div>grupos de trabajo
+                                    <div class="mt-2"></div>grupos
                                 </div>
                                 <div class="p-4 bg-indigo-500 font-bold rounded-xl text-white">
                                     <div class="font-bold text-2xl leading-none">{{ $responsible }}</div>
-                                    <div class="mt-2"></div>Responsables activos
+                                    <div class="mt-2"></div>Responsables
                                 </div>
                             </div>
 

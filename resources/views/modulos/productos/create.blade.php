@@ -52,6 +52,6 @@
             </form>
         </div>
     </div>
-
+    <script src="{{ asset('js/search.js') }}"></script>
 
 </x-app-layout>

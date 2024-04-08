@@ -29,11 +29,16 @@ class Group extends Model
 
     public function activities()
     {
-        return $this->hasMany(Activity::class, 'group_id');
+        return $this->hasMany(Activity::class, 'groups_id');
     }
 
     public function services()
     {
         return $this->hasMany(Service::class, 'groups_id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'groups_id', 'id');
     }
 }

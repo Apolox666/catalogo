@@ -50,7 +50,7 @@
                                 </td>
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
-                                        <a href=""
+                                        <a href="{{route('product.edit', $producto->id)}}"
                                             class="px-4 p-2 bg-blue-500 flex gap-2 rounded-md hover:bg-blue-400">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"

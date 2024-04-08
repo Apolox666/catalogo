@@ -72,7 +72,12 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        return view('modulos/productos.edit');
+        $producto = Product::findOrFail($id);
+        $grupos = Group::select('id', 'name', 'state')
+        ->where('state', 1)
+        ->get();
+    
+        return view('modulos/productos.edit', compact('producto', 'grupos'));
     }
 
     /**
@@ -80,7 +85,30 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $messages = [
+            'required' => 'Este campo es obligatorio.',
+            'name.max' => 'El nombre introducido es muy largo',
+            'name.regex' => 'El campo Nombre solo debe contener letras y espacios.',
+            'min' => 'El nombre instroducido es muy corto',
+            // Añade más mensajes según tus necesidades
+        ];
+        // Valida los datos del formulario
+        $request->validate([
+            'name' => ['required', 'string', 'max:30', 'min:4', 'regex:/^[a-zA-Z\s]+$/'],
+            'groups' => ['required'],
+        ], $messages);
+
+        $producto = Product::findOrFail($id);
+        try {
+            
+            $producto->name = $request->input('name');
+            $producto->state  = 1;
+            $producto->groups_id = $request->input('groups');
+            $producto->save();
+            return redirect(route('product.index'))->with('success', 'Producto editado');
+        } catch (\Throwable $th) {
+            return redirect(route('product.index'))->with('error', 'error al editar producto');
+        }
     }
 
     /**
