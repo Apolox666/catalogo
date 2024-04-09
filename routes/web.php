@@ -12,19 +12,20 @@ use App\Models\Product;
 /* Esta ruta establece la pantalla que verá el usuario cuando entre a mi pagina*/
 
 Route::get('/', function () {
-    $products = Product::all(); // Obtener todos los productos desde la base de datos
+    $products = Product::select('id', 'name', 'state', 'groups_id')
+        ->where('state', 1)
+        ->get();
 
-    // Pasar la variable $products a la vista 'home'
-    return view('home', ['products' => $products]);
+    return view('home', compact('products'));
 })->name('home');
 
 /* Esta ruta valida que el usuaro esté logueado para pasarlo al dashboard admin */
 Route::get('/dashboard', function () {
-    $groups = App\Models\Group::where('state',1)->count();
-    $responsible = App\Models\Responsible::where('state',1)->count();
-    $activity = App\Models\Activity::where('state',1)->count();
-    $service = App\Models\Service::where('state',1)->count();
-    return view('dashboard', ['groups'=>$groups, 'responsible'=>$responsible, 'activity'=>$activity, 'service'=>$service]);
+    $groups = App\Models\Group::where('state', 1)->count();
+    $responsible = App\Models\Responsible::where('state', 1)->count();
+    $activity = App\Models\Activity::where('state', 1)->count();
+    $service = App\Models\Service::where('state', 1)->count();
+    return view('dashboard', ['groups' => $groups, 'responsible' => $responsible, 'activity' => $activity, 'service' => $service]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 

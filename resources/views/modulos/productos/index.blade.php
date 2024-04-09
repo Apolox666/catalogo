@@ -25,7 +25,7 @@
             <div class="overflow-x-auto mb-8 w-full rounded-lg border shadow-xs">
                 <table class="table" id="Table">
 
-                    <thead>
+                    <thead class="bg-blue-500 text-white">
                         <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Grupo asociado</th>
@@ -37,7 +37,7 @@
                     @foreach ($productos as $producto)
                         
                     
-                            <tr class="user-row">
+                            <tr class="user-row ">
 
                                 <td>{{$producto->name}}</td>
                                 <td>
@@ -45,6 +45,7 @@
                                         {{ $producto->group->name }}
                                     @else
                                         <!-- Aquí puedes mostrar un mensaje o dejar vacío el campo -->
+                                        {{dd($producto->group->name)}}
                                         <span class="text-red-500">Sin grupo asignado</span>
                                     @endif
                                 </td>
@@ -64,8 +65,7 @@
                                         </a>
                                         <button
                                             class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
-                                            href="#" data-id=""
-                                            data-url="">
+                                            href="#" data-id="{{$producto->id}}">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                                                 <path stroke="currentColor" stroke-linecap="round"
@@ -99,7 +99,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: 'DELETE',
-                        url: "{{ route('responsible.destroy', ':id') }}".replace(':id', id),
+                        url: "{{ route('product.destroy', ':id') }}".replace(':id', id),
                         data: {
                             _token: '{{ csrf_token() }}'
                         },

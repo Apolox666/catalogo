@@ -11,7 +11,7 @@ class Product extends Model
 
     
 
-    public function groups()
+    public function group()
     {
         return $this->belongsTo(Group::class, 'groups_id');
     }

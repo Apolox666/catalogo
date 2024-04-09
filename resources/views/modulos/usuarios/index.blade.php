@@ -77,8 +77,63 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{ asset('js/eliminar.js') }}"></script>
-    @endpush
+    <script>
+        $('.eliminar').click(function() {
+            var id = $(this).data('id'); // Obtener el valor del atributo data-id
+            Swal.fire({
+                title: '¿Estás seguro de borrar este registro?',
+                text: "Es posible que este responsable esté asosciado a un grupo de trabajo, dejará de ser visible alli",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, borrar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: "{{ route('user.destroy', ':id') }}".replace(':id', id),
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(respuesta) {
+                            Swal.fire(
+                                'Éxito',
+                                'Cambios efectuados correctamente',
+                                'success'
+                            );
+                            // Eliminar el elemento eliminado de la interfaz
+                            $(`.eliminar[data-id=${id}]`).closest('.user-row').remove();
+                        },
+                        error: function(respuesta) {
+                            Swal.fire(
+                                'No se puede realizar esta accion',
+                                'Ocurrio un error al borrar este registro',
+                                'warning'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+     <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+    </script>
    
 </x-app-layout>

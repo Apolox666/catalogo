@@ -28,18 +28,19 @@
                 la MSU</h2>
             <div class="relative w-full">
                 <div class="flex items-center">
-                    <button class="py-2 px-4 bg-blue-700">
-                        <i class="fas fa-search text-white"></i>
-                    </button>
-                    <input type="text" id="search" class="w-full pr-4 py-2 focus:border-blue-700"
-                        placeholder="Buscar...">
                     <select id="product_id" class="ml-2 bg-blue-700 text-white border border-white p-2">
-                        <option value="0">Seleccionar Producto</option>
+                        <option value="0">Seleccione un Producto</option>
                         <option value="">Todos</option>
-                        @foreach ($products as $product)
+                        @foreach ($products->where('state', 1) as $product)
                             <option value="{{ $product->id }}">{{ $product->name }}</option>
                         @endforeach
                     </select>
+
+                    <input type="text" id="search" class="w-full pr-4 py-2 focus:border-blue-700"
+                        placeholder="Buscar...">
+                    <button class="py-2 bg-blue-700">
+                        <i class="fas fa-search text-white"></i>
+                    </button>
                 </div>
 
                 <div id="search-results" class="bg-white rounded-lg mt-2"></div>
@@ -109,7 +110,7 @@
             $('#search').on('input', function() {
                 var searchTerm = $(this).val();
                 var productId = $('#product_id').val(); // Obtener el ID del producto seleccionado
-               
+
                 if (searchTerm.length >= 3) {
                     $.ajax({
                         url: "{{ route('activity.search') }}",
@@ -136,14 +137,14 @@
                     $('#search-results').html('');
                 }
             });
-    
+
             // Agregar evento al cambio del producto seleccionado
             $('#product_id').on('change', function() {
                 $('#search').trigger('input'); // Disparar el evento de búsqueda al cambiar el producto
             });
         });
     </script>
-    
+
 
 
 </body>

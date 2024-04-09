@@ -170,7 +170,7 @@ class ActivitiesController extends Controller
         if (!empty($productId)) {
             // Obtener los IDs de los grupos asociados al producto seleccionado
             
-            $groupIds = Product::find($productId)->groups()->pluck('id')->toArray();
+            $groupIds = Product::find($productId)->group()->pluck('id')->toArray();
     
             // Filtrar por los grupos asociados al producto
             $query->whereHas('group', function ($q) use ($groupIds) {
@@ -197,6 +197,7 @@ class ActivitiesController extends Controller
     public function destroy(string $id)
     {
         $actividades = Activity::findOrFail($id);
+       
         $actividades->state = 0;
         $actividades->save();
         return $resulta = "ok";

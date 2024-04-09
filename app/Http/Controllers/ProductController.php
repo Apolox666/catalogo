@@ -13,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $productos = Product::all();
+        $productos = Product::select('id', 'name', 'state', 'groups_id')
+            ->where('state', 1)
+            ->get();
         return (view('modulos/productos.index', compact('productos')));
     }
 
@@ -74,9 +76,9 @@ class ProductController extends Controller
     {
         $producto = Product::findOrFail($id);
         $grupos = Group::select('id', 'name', 'state')
-        ->where('state', 1)
-        ->get();
-    
+            ->where('state', 1)
+            ->get();
+
         return view('modulos/productos.edit', compact('producto', 'grupos'));
     }
 
@@ -100,7 +102,7 @@ class ProductController extends Controller
 
         $producto = Product::findOrFail($id);
         try {
-            
+
             $producto->name = $request->input('name');
             $producto->state  = 1;
             $producto->groups_id = $request->input('groups');
@@ -116,6 +118,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $producto = Product::findOrFail($id);
+
+        $producto->state = 0;
+        $producto->save();
+        return $resulta = "ok";
     }
 }
