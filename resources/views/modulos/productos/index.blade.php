@@ -45,14 +45,14 @@
                                         {{ $producto->group->name }}
                                     @else
                                         <!-- Aquí puedes mostrar un mensaje o dejar vacío el campo -->
-                                        {{dd($producto->group->name)}}
+                                        
                                         <span class="text-red-500">Sin grupo asignado</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="flex gap-4 text-white items-center">
+                                    <div class="flex gap-4 text-white">
                                         <a href="{{route('product.edit', $producto->id)}}"
-                                            class="px-4 p-2 bg-blue-500 flex gap-2 rounded-md hover:bg-blue-400">
+                                            class="px-4 p-2 bg-blue-500 flex gap-2 rounded-md items-center hover:bg-blue-400">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                 viewBox="0 0 20 18">
@@ -64,7 +64,7 @@
                                             Editar
                                         </a>
                                         <button
-                                            class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
+                                            class="px-4 p-2 bg-red-500 flex gap-2 rounded-md items-center hover:bg-red-400 eliminar"
                                             href="#" data-id="{{$producto->id}}">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">

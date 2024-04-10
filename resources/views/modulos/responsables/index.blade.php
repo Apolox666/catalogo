@@ -46,7 +46,7 @@
                                 <td>
                                     <div class="flex gap-4 text-white items-center">
                                         <a href="{{ route('responsible.edit', $responsible->id) }}"
-                                            class="px-4 p-2 bg-blue-500 flex gap-2 rounded-md hover:bg-blue-400">
+                                            class="px-4 p-2 bg-blue-500 items-center flex gap-2 rounded-md hover:bg-blue-400">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                 viewBox="0 0 20 18">
@@ -58,7 +58,7 @@
                                             Editar
                                         </a>
                                         <button
-                                            class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
+                                            class="px-4 p-2 bg-red-500 flex items-center gap-2 rounded-md hover:bg-red-400 eliminar"
                                             href="#" data-id="{{ $responsible->id }}"
                                             data-url="{{ route('responsible.destroy', $responsible->id) }}">
                                             <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"

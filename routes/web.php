@@ -28,7 +28,7 @@ Route::get('/dashboard', function () {
     return view('dashboard', ['groups' => $groups, 'responsible' => $responsible, 'activity' => $activity, 'service' => $service]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
+Route::delete('/user/state/{id}', [App\Http\Controllers\UserController::class, 'state'])->name('user.state');
 /* El atribute names establece la manera en que voy a referenciar el controlador para acceder a sus metodos */
 Route::resource('usuarios', App\Http\Controllers\UserController::class)->names('user')->middleware('auth');
 Route::resource('actividades', App\Http\Controllers\ActivitiesController::class)->names('activity')->middleware('auth');

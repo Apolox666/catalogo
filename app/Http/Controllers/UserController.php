@@ -137,11 +137,18 @@ class UserController extends Controller
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el usuario.');
             throw $e;
         }
+    }
 
-
-
-        // Redireccionar o realizar otras acciones después de la actualización
-        
+    public function state($id)
+    {
+        $user = User::findOrFail($id);
+    
+        // Cambiar el estado del usuario
+        $user = request('state', 0); // Estado por defecto (inactivo) si no se proporciona 'state'
+      
+        $user->save();
+    
+       
     }
 
     /**

@@ -28,6 +28,7 @@
                         <tr class="bg-blue-500 text-white">
                             <th scope="col">Nombre</th>
                             <th scope="col">Correo</th>
+
                             <th scope="col">Fecha de creacion</th>
                             <th scope="col">Acciones</th>
                         </tr>
@@ -55,6 +56,11 @@
                                                 Editar
                                             </a>
                                             <button
+                                                class="px-4 p-2 bg-yellow-400 flex gap-2 rounded-md hover:bg-yellow-300 estado"
+                                                data-id="{{ $usuario->id }}" >
+                                               Activo
+                                            </button>
+                                            <button
                                                 class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
                                                 href="#" data-id="{{ $usuario->id }}">
                                                 <svg class="w-[16px] h-[16px] text-white" aria-hidden="true"
@@ -66,6 +72,7 @@
                                                 </svg>
                                                 Eliminar
                                             </button>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -117,8 +124,10 @@
             });
         });
     </script>
-     <script>
-        @if(session('success'))
+    
+    
+    <script>
+        @if (session('success'))
             Swal.fire({
                 icon: 'success',
                 title: '{{ session('success') }}',
@@ -126,7 +135,7 @@
                 timer: 1500
             });
         @endif
-        @if(session('error'))
+        @if (session('error'))
             Swal.fire({
                 icon: 'error',
                 title: '{{ session('error') }}',
@@ -135,5 +144,5 @@
             });
         @endif
     </script>
-   
+
 </x-app-layout>
