@@ -84,6 +84,7 @@
             </div>
         </div>
     </div>
+    <!-- Este script accede al metodo destroy para poner en estado 0 el registro -->
     <script>
         $('.eliminar').click(function() {
             var id = $(this).data('id'); // Obtener el valor del atributo data-id

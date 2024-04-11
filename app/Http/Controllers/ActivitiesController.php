@@ -11,7 +11,7 @@ use App\Models\Subprocess;
 
 class ActivitiesController extends Controller
 {
-
+    //redirecciona a la vista de la tabla
     public function index()
     {
         $actividades = Activity::where('state', 1)
@@ -23,7 +23,7 @@ class ActivitiesController extends Controller
         return view('modulos/actividades.index', compact('actividades'));
     }
 
-
+    //redirecciona al formato para crear la actividad
     public function create()
     {
 
@@ -33,7 +33,7 @@ class ActivitiesController extends Controller
         return (view('modulos/actividades.create', compact('grupos')));
     }
 
-
+    //esta funcion registra la actividad
     public function store(Request $request)
     {
         $messages = [
@@ -76,7 +76,7 @@ class ActivitiesController extends Controller
         }
     }
 
-
+    //esta funcion lo que hace es realizar la consulta de las actividades y enviarlas a la vista de los detalles de la actividad
     public function show($id)
     {
         $activity = Activity::where('id', $id)
@@ -96,6 +96,8 @@ class ActivitiesController extends Controller
 
         return view('modulos.actividades.show', compact('activity'));
     }
+
+
     public function edit(string $id)
     {
         $grupos = Group::select('id', 'name', 'state')
@@ -149,11 +151,13 @@ class ActivitiesController extends Controller
     }
 
 
-
+    //este metodo es el encargado realizar el filtro y la consulta de las actividades que se muestran en el home 
     public function search(Request $request)
     {
+        //recibe los terminos ingresados en el input
         $searchTerm = $request->input('search');
-        $productId = $request->input('product_id'); // Obtener el ID del producto seleccionado
+        // Obtener el ID del producto seleccionado
+        $productId = $request->input('product_id'); 
     
         // Iniciar la consulta de actividades
         $query = Activity::query();
@@ -191,9 +195,7 @@ class ActivitiesController extends Controller
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //coloca en estado 0 la actividad
     public function destroy(string $id)
     {
         $actividades = Activity::findOrFail($id);

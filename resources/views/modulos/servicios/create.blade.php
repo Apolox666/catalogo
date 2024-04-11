@@ -90,5 +90,36 @@
         </div>
     </div>
     <script src="{{ asset('js/search.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        // Función para verificar si el grupo seleccionado ya está en uso
+        function checkGroupAvailability(groupId) {
+            axios.get('/check-group-availability/' + groupId)
+                .then(response => {
+                    if (response.data.message === 'Grupo en uso') {
+                        // Si el grupo está en uso, mostrar alerta con SweetAlert
+                        swal("¡Advertencia!", "Este grupo ya está asignado a otro servicio activo.", "warning");
+                    } else {
+                        // Si el grupo está disponible, enviar el formulario
+                        document.getElementById('serviceForm').submit();
+                    }
+                })
+                .catch(error => {
+                    // Manejar errores de la solicitud
+                    console.error(error);
+                });
+        }
 
+        // Capturar evento de selección de grupo
+        document.addEventListener('DOMContentLoaded', function() {
+            const groupRadios = document.querySelectorAll('input[name="groups"]');
+
+            groupRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const groupId = this.value;
+                    checkGroupAvailability(groupId);
+                });
+            });
+        });
+    </script>
 </x-app-layout>

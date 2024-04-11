@@ -101,7 +101,7 @@
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
+    <!-- Este script muestra los resultados al ser escritos caracteres en el buscador   -->
     <script>
         $(document).ready(function() {
             $('#search').on('input', function() {
@@ -141,9 +141,5 @@
             });
         });
     </script>
-
-
-
 </body>
-
 </html>

@@ -103,6 +103,7 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
 
+        //Personalizo los mensajes de validacion segun el campo
         $messages = [
             'required' => 'Este campo es obligatorio.',
             'name.max' => 'El nombre introducido es muy largo',
@@ -116,15 +117,15 @@ class UserController extends Controller
 
         $user = User::find($id);
 
+        //establezco las validaciones para los campos
         $validator = $request->validate([
             'name' => ['required', 'string', 'max:28', 'regex:/^[a-zA-Z\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $messages);
 
-        // Verificar la unicidad del correo electrónico excluyendo el usuario actual
 
-        // Actualizar otros campos
+
         try {
 
             $user->name = $request->input('name');
@@ -142,10 +143,7 @@ class UserController extends Controller
     public function state($id)
     {
         $user = User::findOrFail($id);
-    
-        // Cambiar el estado del usuario
-        $user = request('state', 0); // Estado por defecto (inactivo) si no se proporciona 'state'
-      
+        $user = request('state', 0); 
         $user->save();
     
        
@@ -156,10 +154,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-
-
         $user = User::findOrFail($id);
-
         $user->delete();
         return $resulta = "ok";
     }

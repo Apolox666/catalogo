@@ -10,9 +10,7 @@ use App\Models\Responsible;
 
 class ResponsibleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //muestra la vista de la tabla con los datos mostrados en ella
     public function index()
     {
         $responsibles = Responsible::select('id', 'name', 'state')
@@ -22,17 +20,13 @@ class ResponsibleController extends Controller
         return (view('modulos/responsables.index', compact('responsibles')));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    //muestra el formulario para crear un nuevo registro
     public function create()
     {
         return (view('modulos/responsables.create'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //registra un nuevo responsable
     public function store(Request $request)
     {
         $messages = [
@@ -52,8 +46,9 @@ class ResponsibleController extends Controller
             'second_surname' => ['required', 'string',  'min:4', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
         ], $messages);
 
+        //aqui se toman los campos del formulario y se unen en un string haciendo cada primer letra mayuscula
         $first_name = ucfirst($request->input('first_name'));
-        $second_name = ucfirst($request->input('second_name'));
+        $second_name = ucfirst($requesst->input('second_name'));
         $first_surname = ucfirst($request->input('first_surname'));
         $second_surname = ucfirst($request->input('second_surname'));
 
@@ -75,26 +70,15 @@ class ResponsibleController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
     {
         $responsible = Responsible::findOrFail($id);
         return (view('modulos/responsables.edit', compact('responsible')));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, string $id)
     {
 

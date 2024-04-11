@@ -9,7 +9,7 @@ use App\Models\Product;
 
 
 
-/* Esta ruta establece la pantalla que verá el usuario cuando entre a mi pagina*/
+
 
 Route::get('/', function () {
     $products = Product::select('id', 'name', 'state', 'groups_id')
@@ -19,7 +19,8 @@ Route::get('/', function () {
     return view('home', compact('products'));
 })->name('home');
 
-/* Esta ruta valida que el usuaro esté logueado para pasarlo al dashboard admin */
+
+/*con esta ruta se da entrada al dashboard y se envian los datos que se muestran en el*/ 
 Route::get('/dashboard', function () {
     $groups = App\Models\Group::where('state', 1)->count();
     $responsible = App\Models\Responsible::where('state', 1)->count();
@@ -28,8 +29,9 @@ Route::get('/dashboard', function () {
     return view('dashboard', ['groups' => $groups, 'responsible' => $responsible, 'activity' => $activity, 'service' => $service]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+/*Este grupo de rutas se encarga de los diferentes modulos del aplicativo*/
+Route::get('/check-group-availability/{groupId}', 'ServicesController@checkGroupAvailability');
 Route::delete('/user/state/{id}', [App\Http\Controllers\UserController::class, 'state'])->name('user.state');
-/* El atribute names establece la manera en que voy a referenciar el controlador para acceder a sus metodos */
 Route::resource('usuarios', App\Http\Controllers\UserController::class)->names('user')->middleware('auth');
 Route::resource('actividades', App\Http\Controllers\ActivitiesController::class)->names('activity')->middleware('auth');
 Route::resource('grupos', App\Http\Controllers\GroupsController::class)->names('group')->middleware('auth');
@@ -42,7 +44,7 @@ Route::get('/activities/{id}', [ActivitiesController::class, 'show'])->name('act
 
 
 
-
+/* Este grupo de rutas se encargan del perfil del usuario logueado*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

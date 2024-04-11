@@ -76,6 +76,7 @@
             </div>
         </div>
     </div>
+    <!-- Este script accede al metodo destroy para poner en estado 0 el registro -->
     <script>
         $('.eliminar').click(function() {
             var id = $(this).data('id'); // Obtener el valor del atributo data-id
@@ -116,22 +117,22 @@
             });
         });
     </script>
-<script>
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: '{{ session('success') }}',
-            showConfirmButton: false,
-            timer: 1500
-        });
-    @endif
-    @if(session('error'))
-        Swal.fire({
-            icon: 'error',
-            title: '{{ session('error') }}',
-            showConfirmButton: false,
-            timer: 1500
-        });
-    @endif
-</script>
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+    </script>
 </x-app-layout>
