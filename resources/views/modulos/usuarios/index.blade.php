@@ -56,10 +56,13 @@
                                                 Editar
                                             </a>
                                             <button
-                                                class="px-4 p-2 bg-yellow-400 flex gap-2 rounded-md hover:bg-yellow-300 estado"
-                                                data-id="{{ $usuario->id }}" >
-                                               Activo
+                                                class="cambiar-estado px-4 p-2 rounded-md
+                                            {{ $usuario->state ? 'bg-green-500' : 'bg-black' }}"
+                                                data-id="{{ $usuario->id }}" data-state="{{ $usuario->state }}">
+                                                {{ $usuario->state ? 'Activo' : 'Inactivo' }}
                                             </button>
+
+
                                             <button
                                                 class="px-4 p-2 bg-red-500 flex gap-2 rounded-md hover:bg-red-400 eliminar"
                                                 href="#" data-id="{{ $usuario->id }}">
@@ -124,8 +127,58 @@
             });
         });
     </script>
-    
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.cambiar-estado').click(function() {
+                var id = $(this).data('id');
+                var state = $(this).data('state');
+                var newState = state === 1 ? 0 : 1;
+                var action = newState ? 'activar' : 'inactivar';
+
+                Swal.fire({
+                    title: `¿Estás seguro de ${action} este usuario?`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: `¡Sí, ${action}!`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'PUT',
+                            url: `{{ route('user.state', ':id') }}`.replace(':id', id),
+                            data: {
+                                state: newState,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Éxito',
+                                    `Usuario ${newState ? 'activado' : 'inactivado'} correctamente.`,
+                                    'success'
+                                ).then(() => {
+                                    location.reload(); // Recargar la página
+                                });
+                            },
+                            error: function(response) {
+                                Swal.fire(
+                                    'Error',
+                                    'Hubo un problema al realizar esta acción.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
     <script>
         @if (session('success'))
             Swal.fire({

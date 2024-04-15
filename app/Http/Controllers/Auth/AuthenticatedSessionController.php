@@ -25,12 +25,28 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->only('email', 'password');
 
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            // Get the authenticated user
+            $user = Auth::user();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            // Check if the user's state is 0 (disabled)
+            if ($user->state === 0) {
+                Auth::logout();
+                return back()->with('error', 'Tu cuenta está deshabilitada. Contacta al administrador.');
+            }
+
+            $request->session()->regenerate();
+
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        return back()->withErrors([
+            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros o tu cuenta está deshabilitada.',
+        ]);
     }
+
 
     /**
      * Destroy an authenticated session.

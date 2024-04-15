@@ -100,7 +100,9 @@
                 <x-input-label for="priority" :value="__('Seleccione el impacto o prioridad de esta actividad *')" class="pt-8" />
                 <div class="mb-4 pt-4">
                     <select name="priority" id="" class="{{ $errors->has('priority') ? 'border-red-600' : '' }}">
+                        
                         <option value="0">Seleccione una opcion</option>
+                        <option value="Baja">baja</option>
                         <option value="Minima">Minima</option>
                         <option value="Media">Media</option>
                         <option value="Alta">Alta</option>

@@ -54,13 +54,13 @@ class UserController extends Controller
             'email.email' => 'Ingrese una dirección de correo electrónico válida.',
             'email.unique' => 'Este correo electrónico ya está tomado.',
             'password.confirmed' => 'Las contraseñas no coinciden.',
-            
+
         ];
 
         $validator = $request->validate([
             'name' => ['required', 'string', 'max:28', 'min:4', 'regex:/^[a-zA-Z\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required','min:8', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'min:8', 'confirmed', Rules\Password::defaults()],
             'password_confirmation' => ['required']
         ], $messages);
 
@@ -74,7 +74,6 @@ class UserController extends Controller
             return redirect()->route('user.index')->with('success', 'El usuario ha sido creado.');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el usuario.');
-            throw $e;
         }
     }
 
@@ -136,17 +135,17 @@ class UserController extends Controller
             return (redirect(route('user.index')));
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error', 'Ha ocurrido un error al crear el usuario.');
-            throw $e;
         }
     }
 
-    public function state($id)
+
+    public function state(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $user = request('state', 0); 
+        $user->state = $request->state;
         $user->save();
     
-       
+        return response()->json(['message' => 'Estado actualizado correctamente.']);
     }
 
     /**

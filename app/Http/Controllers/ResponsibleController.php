@@ -40,15 +40,15 @@ class ResponsibleController extends Controller
             // Añade más mensajes según tus necesidades
         ];
         $validator = $request->validate([
-            'first_name' => ['required', 'string', 'min:4', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
-            'first_surname' => ['required', 'string', 'min:4', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
-            'second_name' => ['max:20',  'min:4', 'regex:/^[a-zA-Z\s]+$/', 'nullable'],
-            'second_surname' => ['required', 'string',  'min:4', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'first_name' => ['required', 'string', 'min:3', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'first_surname' => ['required', 'string', 'min:3', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
+            'second_name' => ['max:20',  'min:3', 'regex:/^[a-zA-Z\s]+$/', 'nullable'],
+            'second_surname' => ['required', 'string',  'min:3', 'max:20', 'regex:/^[a-zA-Z\s]+$/'],
         ], $messages);
 
         //aqui se toman los campos del formulario y se unen en un string haciendo cada primer letra mayuscula
         $first_name = ucfirst($request->input('first_name'));
-        $second_name = ucfirst($requesst->input('second_name'));
+        $second_name = ucfirst($request->input('second_name'));
         $first_surname = ucfirst($request->input('first_surname'));
         $second_surname = ucfirst($request->input('second_surname'));
 

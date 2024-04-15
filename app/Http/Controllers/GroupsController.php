@@ -46,7 +46,7 @@ class GroupsController extends Controller
         ];
         // Valida los datos del formulario
         $request->validate([
-            'name' => ['required', 'string', 'max:30', 'min:4', 'regex:/^[a-zA-Z\s]+$/'],
+            'name' => ['required', 'string', 'max:60', 'min:4', 'regex:/^[a-zA-Z\s]+$/'],
             'responsibles' => 'required|array',
         ], $messages);
 
@@ -102,7 +102,7 @@ class GroupsController extends Controller
 
         // Valida los datos del formulario
         $request->validate([
-            'name' => 'required|string|max:255|min:4|regex:/^[a-zA-ZñÑ\s]+$/',
+            'name' => 'required|string|max:60|min:4|regex:/^[a-zA-ZñÑ\s]+$/',
             'responsibles' => 'array', // Asegura que al menos un responsable sea seleccionado
         ], $messages);
 

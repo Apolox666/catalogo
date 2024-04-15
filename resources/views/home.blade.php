@@ -16,6 +16,14 @@
             background-size: cover;
             background-position: center;
         }
+
+        #search-results {
+            max-height: 300px;
+            /* Establece la altura máxima deseada */
+            overflow-y: auto;
+         
+    
+        }
     </style>
 </head>
 
@@ -24,23 +32,26 @@
 
     <section class="  py-20 md:py-0 w-full h-screen image relative z-0">
         <div class="flex flex-col text-center justify-center items-center max-w-[1200px] w-[90%] mx-auto h-full">
-            <h2 class="font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-10 md:mb-20">Consulta una actividad de la MSU</h2>
+            <h2 class="font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-10 md:mb-20">Consulta una actividad de
+                la MSU</h2>
             <div class="relative w-full">
                 <div class="flex items-center">
-                    <select id="product_id" class="ml-2 bg-blue-700 text-white border border-white p-2 w-72"> <!-- Ajusta el ancho aquí -->
+                    <select id="product_id" class="ml-2 bg-blue-700 text-white border border-white p-2 w-72">
+                        <!-- Ajusta el ancho aquí -->
                         <option value="x">Seleccione un Producto</option>
                         <option value="">Todas las actividades</option>
                         @foreach ($products->where('state', 1) as $product)
                             <option value="{{ $product->id }}">{{ $product->name }}</option>
                         @endforeach
                     </select>
-        
-                    <input type="text" id="search" class="w-full pr-4 py-2 focus:border-blue-700 flex-1"> <!-- Ajusta el ancho aquí -->
+
+                    <input type="text" id="search" class="w-full pr-4 py-2 focus:border-blue-700 flex-1">
+                    <!-- Ajusta el ancho aquí -->
                     <button class="py-2 px-4 bg-blue-700">
                         <i class="fas fa-search text-white"></i>
                     </button>
                 </div>
-        
+
                 <div id="search-results" class="bg-white rounded-lg mt-2"></div>
             </div>
         </div>
@@ -142,4 +153,5 @@
         });
     </script>
 </body>
+
 </html>

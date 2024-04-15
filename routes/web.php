@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivitiesController;
 use Illuminate\Routing\Controllers\Middleware;
 use App\Models\Product;
+use App\Http\Controllers\UserController;
 
 
 
@@ -28,10 +29,11 @@ Route::get('/dashboard', function () {
     $service = App\Models\Service::where('state', 1)->count();
     return view('dashboard', ['groups' => $groups, 'responsible' => $responsible, 'activity' => $activity, 'service' => $service]);
 })->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::post('/user/state/{id}', [UserController::class, 'state'])->name('user.state');
 /*Este grupo de rutas se encarga de los diferentes modulos del aplicativo*/
-Route::get('/check-group-availability/{groupId}', 'ServicesController@checkGroupAvailability');
-Route::delete('/user/state/{id}', [App\Http\Controllers\UserController::class, 'state'])->name('user.state');
+
+
+Route::put('/user/{id}/state', [UserController::class, 'state'])->name('user.state');
 Route::resource('usuarios', App\Http\Controllers\UserController::class)->names('user')->middleware('auth');
 Route::resource('actividades', App\Http\Controllers\ActivitiesController::class)->names('activity')->middleware('auth');
 Route::resource('grupos', App\Http\Controllers\GroupsController::class)->names('group')->middleware('auth');

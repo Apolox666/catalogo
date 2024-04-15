@@ -46,7 +46,7 @@ class ActivitiesController extends Controller
 
 
         $request->validate([
-            'name' => ['required', 'string', 'min:4', 'max:30'],
+            'name' => ['required', 'string', 'min:4', 'max:80'],
             'groups' => 'required',
             'priority' => 'required',
             'time_type' => 'required',
@@ -121,7 +121,7 @@ class ActivitiesController extends Controller
 
 
         $request->validate([
-            'name' => 'required|string|max:355|min:4',
+            'name' => 'required|string|max:80|min:4',
             'groups' => 'required',
             'priority' => 'required',
             'time_type' => 'required',
