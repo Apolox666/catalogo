@@ -4,15 +4,19 @@
             <div class="bg-white l rounded-3xl p-8 mb-5">
                 <h1 class="text-3xl font-bold mb-10">Bienvenid@ {{ auth()->user()->name }} =)</h1>
                 <hr class="my-10">
-
                 <div class=" gap-x-20">
                     <div>
                         <h2 class="text-2xl font-bold mb-4">Resumen del catalogo TI</h2>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-2">
                                 <div class="p-4 bg-green-400 rounded-xl">
-                                    <div class="font-bold text-xl text-gray-800 leading-none">Listado de productos
+                                    <div class="font-bold text-xl text-white leading-none">Listado de productos
                                     </div>
+                                    @foreach ($product as $product)
+                                    <div class="font-bold text-gray-600">
+                                        {{$product->name}}
+                                    </div>
+                                    @endforeach                                 
                                     <div class="mt-5">
                                         <button type="button"
                                             class="inline-flex items-center justify-center py-2 px-3 rounded-xl bg-white text-gray-800 hover:text-green-500 text-sm font-semibold transition">
@@ -35,8 +39,6 @@
                                     <div class="mt-2"></div>Responsables
                                 </div>
                             </div>
-
-
                             <div class="col-span-2">
                                 <div class="p-4 bg-purple-500 rounded-xl text-white">
                                     <div class="font-bold text-xl leading-none">Total actividades</div>
@@ -45,12 +47,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
-
-
 </x-app-layout>

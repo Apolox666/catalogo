@@ -26,8 +26,9 @@ Route::get('/dashboard', function () {
     $groups = App\Models\Group::where('state', 1)->count();
     $responsible = App\Models\Responsible::where('state', 1)->count();
     $activity = App\Models\Activity::where('state', 1)->count();
+    $product = \App\Models\Product::select('id', 'name', 'state')->where('state',1)->get();
     $service = App\Models\Service::where('state', 1)->count();
-    return view('dashboard', ['groups' => $groups, 'responsible' => $responsible, 'activity' => $activity, 'service' => $service]);
+    return view('dashboard', ['groups' => $groups, 'responsible' => $responsible, 'activity' => $activity, 'service' => $service, 'product' => $product]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/user/state/{id}', [UserController::class, 'state'])->name('user.state');
 /*Este grupo de rutas se encarga de los diferentes modulos del aplicativo*/
